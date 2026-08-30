@@ -1,0 +1,13 @@
+Asunto
+
+Gracias por su mensaje (#{ticket.title})
+
+Cuerpo
+
+Hemos recibido su solicitud con el número (#{config.ticket_hook}#{ticket.number}).
+
+Puede seguir el estado de su ticket en el siguiente enlace:
+#{config.http_type}://#{config.fqdn}/#ticket/zoom/#{ticket.id}
+
+Atentamente,
+El equipo de soporte de AVS Consulting.
