@@ -1,4 +1,6 @@
 Documentacion/Privado/*
+!Documentacion/Privado/credenciales-zammad.md.enc
+!Documentacion/Privado/credenciales-zammad.key.enc
 Backups/*
 **/.DS_Store
 **/workspace*.json

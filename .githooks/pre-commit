@@ -1,0 +1,14 @@
+#!/bin/sh
+if ! command -v gitleaks >/dev/null 2>&1; then
+  echo "aviso: gitleaks no esta instalado, se omite el escaneo de secretos" >&2
+  exit 0
+fi
+
+gitleaks git --staged --no-banner
+status=$?
+if [ "$status" -ne 0 ]; then
+  echo "" >&2
+  echo "gitleaks detecto un posible secreto en los cambios en staging. Commit bloqueado." >&2
+  echo "Si es un falso positivo, anadelo a .gitleaks.toml (seccion [allowlist]) y reintenta." >&2
+fi
+exit $status
