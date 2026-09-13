@@ -13,9 +13,17 @@ description: Acceder a la API REST de Zammad (https://zammad.avsconsulting.es) p
 
 ## Credenciales
 
-Las credenciales NO están en este archivo (versionado). Están en:
+Las credenciales NO están en este archivo (versionado). Están cifradas en
+`Documentacion/Privado/credenciales-zammad.md.enc` (+ `.key.enc`, ambos versionados;
+el `.md` en claro nunca se versiona). Desbloquear con:
 
-`Documentacion/Privado/credenciales-zammad.md` (excluido de Git por `.gitignore`)
+```
+python "%USERPROFILE%\.config\obsidian-vault\secrets_tool.py" unlock --file "Documentacion/Privado/credenciales-zammad.md" --ttl 300
+```
+
+y volver a cifrar con `lock` en cuanto termines de usarlas. Ver
+`.skills/zammad-tickets-pendientes/SKILL.md` para el detalle de cómo extraer
+usuario/contraseña sin imprimirlos.
 
 Verificado el 2026-08-30: ambos métodos de autenticación están habilitados en `Admin > Ajustes > Sistema > API`:
 - **Token de acceso (recomendado)** — HTTP Token Authentication.
