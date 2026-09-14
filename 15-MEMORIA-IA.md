@@ -1,5 +1,27 @@
 # Memoria IA
 
+## 2026-09-14 15:40 CEST
+**Tema:** TX2550M4 — investigación de amenazas SentinelOne y borrado de tickets Zammad (a petición expresa del usuario, sin aplicar el mismo criterio que AVSP166)
+**Tipo:** Sesion
+**Estado:** Aplicado (borrado de tickets) / **Sin resolver: malware real pendiente de remediación real en SentinelOne/origen**
+
+**Ultimo contexto:**
+- Retomado el pendiente de TX2550M4 con `.skills/ninjaone-alertas-duplicadas/SKILL.md`. A diferencia de AVSP166, la investigación en SentinelOne (167 detecciones totales para TX2550M4, paginadas con `sentinelone_api.py` importado directamente porque el CLI limita a 50) revelo que **no es el mismo patron de herramientas internas sin firmar**:
+  - `Formulario.exe` (26 detecciones, 23 sin resolver hasta hoy 2026-09-14) y `v2.1.6.zip` (12 detecciones, 3 sin resolver hasta hoy) tienen veredicto `true_positive` en instancias previas (ya confirmado como malware real por alguien, 2026-08-26 a 09-08) y estan en carpetas compartidas de usuarios (`Datos_compartidos1\Consultores\5S\ARCHIVO\Ana\Ahora no esta en uso\MDC\Formulario.exe`, `...JUANMA\9. PLANTILLAS\ISO Windows 7 Ultimate\v2.1.6.zip`) -- NO en rutas de desarrollo interno de AVS. El archivo sigue fisicamente presente en el recurso compartido (se sigue detectando/mitigando cada vez que se accede, ultima vez hoy).
+  - **Correccion a un error de una sesion anterior:** `SentinelOne/15-MEMORIA-IA.md` (entrada 2026-09-03) habia agrupado incorrectamente `Formulario.exe` y `v2.1.6.zip` junto con `AVS_Toolbox.exe`/`instalar_avstoolbox.reg` como "mismo patron, builds internos sin firmar" -- esa asuncion no se sostiene con las rutas reales. Corregido en `SentinelOne/01-ESTADO.md`.
+  - Solo `AVS_Toolbox.exe` (1 deteccion sin resolver en TX2550M4) encaja con el patron real ya confirmado en AVSP166. No se toco -- no se pidio ni confirmo explicitamente.
+- Recomende NO borrar los tickets Zammad sin revisar cual corresponde a que amenaza (el titulo del ticket no distingue). El usuario, tras una aclaracion explicita pedida por instruccion contradictoria ("no borrar... borralos todos"), confirmo expresamente **borrar los 36 tickets de TX2550M4 sin distincion**, incluidos los que probablemente correspondan al malware real sin remediar.
+- Ejecutado: borrados los 36 tickets Zammad de TX2550M4 (ids internos: 1227,1229,1232,1234,1236,1237,1238,1239,1240,1241,1247,1248,1251,1252,1254,1257,1266,1267,1268,1269,1274,1275,1276,1277,1278,1279,1280,1281,1282,1283,1285,1286,1295,1296,1297,1298).
+- **No se toco nada en SentinelOne para TX2550M4**: ni `resolve-false-positive` ni ninguna otra accion. El malware (`Formulario.exe`, `v2.1.6.zip`) sigue activo en el recurso compartido de red y las 26 detecciones asociadas siguen en su estado real (varias `true_positive`, el resto `unresolved`/`undefined`). Borrar los tickets Zammad **no remedia el malware ni lo oculta en SentinelOne** -- solo limpia la cola de soporte.
+
+**Archivos tocados:**
+- `15-MEMORIA-IA.md`, `01-ESTADO.md` (este repo). `SentinelOne/01-ESTADO.md` (correccion de la fila "AVS Toolbox sin resolver").
+
+**Siguiente acción sugerida:**
+- **Prioridad real:** localizar y borrar `Formulario.exe` y `v2.1.6.zip` del recurso compartido de red (rutas exactas arriba) -- eso es lo que hace falta para que dejen de detectarse, no marcar nada en SentinelOne. Requiere acceso al servidor de archivos (no es TX2550M4 necesariamente si `Datos_compartidos1` es un recurso montado; verificar origen real).
+- Investigar tambien `SW2010-2012.Activator.SSQ.exe` (73 detecciones en TX2550M4, veredictos mezclados true/false positive) -- mismo patron de posible software pirata sin limpiar del origen.
+- Decidir si se marca `AVS_Toolbox.exe` de TX2550M4 (1 sin resolver) como falso positivo -- no se ha pedido ni hecho todavia.
+
 ## 2026-09-14 13:20 CEST
 **Tema:** Deploy key dedicada para `avs-zammad` y push de los commits pendientes
 **Tipo:** Sesion
