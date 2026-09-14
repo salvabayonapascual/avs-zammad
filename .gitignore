@@ -4,3 +4,4 @@ Documentacion/Privado/*
 Backups/*
 **/.DS_Store
 **/workspace*.json
+.claude/settings.local.json

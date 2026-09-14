@@ -8,6 +8,11 @@ description: Listar y ordenar los tickets pendientes (no cerrados) de Zammad (ht
 Complementa a `.skills/zammad-api/SKILL.md` (auth y endpoints generales). Este skill es
 el proceso concreto, ya validado, para obtener los tickets pendientes ordenados.
 
+Si al listar aparece el patron `alerta ninjaone <equipo> / <persona>` repetido muchas veces
+para el mismo equipo y se pide limpiarlo/resolverlo, usar
+`.skills/ninjaone-alertas-duplicadas/SKILL.md` en vez de borrar aqui a mano -- ese skill
+cubre la investigacion en SentinelOne y el borrado seguro (por `id`, no por `number`).
+
 ## Qué es "pendiente"
 
 Estados de Zammad (`GET /api/v1/ticket_states`): `1=new`, `2=open`, `3=pending reminder`,

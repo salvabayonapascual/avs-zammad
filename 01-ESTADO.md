@@ -3,12 +3,23 @@
 ## Situación actual
 
 - [x] Accesos web y SSH del LXC registrados en `04-INVENTARIO.md`.
-- [x] Credenciales de Zammad guardadas en `Documentacion/Privado/credenciales-zammad.md` (no versionado).
-- [x] API REST de Zammad verificada y documentada en la skill `.skills/zammad-api/`.
+- [x] Credenciales de Zammad cifradas con cifrado de sobre: `Documentacion/Privado/credenciales-zammad.md.enc` + `.key.enc` (incluye login web y la clave SSH `id_ed25519` usada para el acceso root, ver `15-MEMORIA-IA.md` 2026-09-13).
+- [x] API REST de Zammad verificada y documentada en la skill `.skills/zammad-api/`; nueva skill `.skills/zammad-tickets-pendientes/`.
 - [x] Eliminados 3 tickets duplicados de alerta ransomware TX2550M4 del 2026-08-30 (ver `03-DECISIONES.md`).
+- [x] Analizados los 69 tickets pendientes (2026-09-13): 46 son alertas NinjaOne duplicadas (TX2550M4/AVSP166), 23 distintos. Coordinado con SentinelOne: AVSP166 = 4 herramientas internas sin firmar, 26 detecciones, 8 sin resolver confirmadas por el usuario como falso positivo.
+
+## Completado al reabrir sesión (2026-09-13, tras reinicio de VSCode)
+
+- [x] SentinelOne: 8 amenazas AVSP166 marcadas `false_positive` + `resolved` (reintento tras bloqueo transitorio del classifier).
+- [x] Zammad: 10 tickets AVSP166 borrados via API (ids internos 1249,1250,1259,1260,1261,1262,1264,1265,1272,1273 -- verificados contra su `number`/`title` antes de borrar).
+- [ ] `git push origin main` en este repo sigue sin completarse: el classifier ya deja pasar el intento, pero GitHub rechaza la deploy key de este repo por permiso de solo lectura (`salvabayonapascual/avs-zammad.git`) -- hay que darle permiso de escritura en GitHub, no es algo resoluble desde aqui. 2 commits locales listos esperando.
+- [x] Creada skill `.skills/ninjaone-alertas-duplicadas/SKILL.md` (flujo completo: identificar en Zammad, investigar en SentinelOne, confirmar con el usuario, marcar y borrar) para repetir este proceso con otros equipos (empezando por TX2550M4).
+
+Detalle completo en `15-MEMORIA-IA.md` (entradas 2026-09-13).
 
 ## Próxima acción recomendada
 
 - [ ] Generar un token de acceso personal en Zammad para dejar de usar la contraseña en llamadas API.
-- [ ] Revisar la regla NinjaOne/SentinelOne para TX2550M4 (posible falso positivo recurrente) y decidir si se limpian los duplicados históricos.
+- [ ] Decidir sobre los 36 tickets Zammad restantes y las detecciones SentinelOne de TX2550M4 (mismo patron que AVSP166, sin confirmar todavia).
+- [ ] Corregir `Documentacion/Conexion/RCLONE.cmd`: referencia `id_rsa`, que no existe en este equipo (el acceso real usa `id_ed25519`).
 - [ ] Completar `04-INVENTARIO.md` con el resto de datos técnicos del LXC (recursos, versión de Zammad, etc.).
