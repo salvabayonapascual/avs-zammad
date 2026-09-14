@@ -1,5 +1,22 @@
 # Memoria IA
 
+## 2026-09-14 13:20 CEST
+**Tema:** Deploy key dedicada para `avs-zammad` y push de los commits pendientes
+**Tipo:** Sesion
+**Estado:** Aplicado
+
+**Ultimo contexto:**
+- El `git push` seguia fallando ("denied to deploy key") aunque el classifier ya lo permitia. Causa real encontrada con `ssh -T git@github.com`: el remote usaba `git@github.com:...` (sin alias), que resuelve a la clave por defecto del equipo (`id_ed25519`) -- y esa clave YA es la deploy key de otro repo distinto (`avs-servdor-windows-server-2019`). GitHub no permite que la misma clave publica sea deploy key de dos repos, asi que anadirla tambien aqui no daba acceso real.
+- Solucion aplicada, igual que en los repos hermanos (NinjaOne usa `github.com-ninjaone-avs`, etc.): generada una clave SSH dedicada solo para este repo (`~/.ssh/id_ed25519_zammad`), anadido el alias `github.com-zammad-avs` en `~/.ssh/config`, remote de este repo cambiado a `git@github.com-zammad-avs:salvabayonapascual/avs-zammad.git`, y anadida esa clave publica como deploy key de `avs-zammad` en GitHub con "Allow write access".
+- Verificado con `ssh -T git@github.com-zammad-avs` -> `Hi salvabayonapascual/avs-zammad!`. Push completado: los 5 commits pendientes (cifrado de credenciales, skills, cierre AVSP166) ya estan en `origin/main`. Repo limpio (`git status` sin diferencias con el remoto).
+- La clave nueva es dedicada a este repo (modelo "dedicada", no se centraliza en `credenciales-zammad.md.enc` -- solo sirve para push/pull de este git remoto desde este equipo, no da acceso a nada mas).
+
+**Archivos tocados:**
+- `~/.ssh/id_ed25519_zammad(.pub)`, `~/.ssh/config` (fuera del repo), `.git/config` (remote url) de este repo.
+
+**Siguiente acción sugerida:**
+- Si se clona este repo en otro equipo, hay que generar/copiar esa misma logica (clave dedicada + alias + deploy key en GitHub, o copiar la clave privada existente por un canal seguro) para poder hacer push desde ahi tambien.
+
 ## 2026-09-13 21:05 CEST (continuación, tras reinicio de VSCode)
 **Tema:** Ejecución de lo pendiente (AVSP166) y skill para repetir el proceso
 **Tipo:** Sesion

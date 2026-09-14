@@ -14,8 +14,9 @@
 - [x] Zammad: 10 tickets AVSP166 borrados via API (ids internos 1249,1250,1259,1260,1261,1262,1264,1265,1272,1273 -- verificados contra su `number`/`title` antes de borrar).
 - [ ] `git push origin main` en este repo sigue sin completarse: el classifier ya deja pasar el intento, pero GitHub rechaza la deploy key de este repo por permiso de solo lectura (`salvabayonapascual/avs-zammad.git`) -- hay que darle permiso de escritura en GitHub, no es algo resoluble desde aqui. 2 commits locales listos esperando.
 - [x] Creada skill `.skills/ninjaone-alertas-duplicadas/SKILL.md` (flujo completo: identificar en Zammad, investigar en SentinelOne, confirmar con el usuario, marcar y borrar) para repetir este proceso con otros equipos (empezando por TX2550M4).
+- [x] `git push` resuelto (2026-09-14): la clave por defecto del equipo ya era deploy key de otro repo. Generada clave dedicada `id_ed25519_zammad`, alias `github.com-zammad-avs` en `~/.ssh/config`, remote actualizado y deploy key con permiso de escritura anadida en GitHub. Repo sincronizado con `origin/main`.
 
-Detalle completo en `15-MEMORIA-IA.md` (entradas 2026-09-13).
+Detalle completo en `15-MEMORIA-IA.md` (entradas 2026-09-13 y 2026-09-14).
 
 ## Próxima acción recomendada
 
