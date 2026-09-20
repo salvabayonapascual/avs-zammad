@@ -1,5 +1,10 @@
 # Estado
 
+> **Resumen rápido** · Última actualización: 2026-09-20
+> **Alta:** ninguno abierto ahora mismo.
+> **Media:** corregir `Documentacion/Conexion/RCLONE.cmd` (referencia una clave que no existe); completar `04-INVENTARIO.md` con datos técnicos del LXC.
+> Detalle completo más abajo.
+
 ## Situación actual
 
 - [x] Accesos web y SSH del LXC registrados en `04-INVENTARIO.md`.
