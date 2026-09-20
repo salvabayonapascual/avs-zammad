@@ -1,5 +1,23 @@
 # Memoria IA
 
+## 2026-09-20 CEST (2)
+**Tema:** Correccion: `Formulario.exe`/`v2.1.6.zip` SI se remediaron el 2026-09-15 -- esta info llevaba 5 dias desactualizada
+**Tipo:** Sesion (correccion, iniciada desde el proyecto SentinelOne)
+**Estado:** Aplicado
+
+**Ultimo contexto:**
+- Desde una sesion en el proyecto SentinelOne, el usuario informo de que "el repo de Zammad" seguia mostrando `Formulario.exe` y `v2.1.6.zip` como malware activo sin remediar (referencia a la entrada de este archivo del 2026-09-14 15:40 CEST y a la fila correspondiente de `01-ESTADO.md`).
+- Verificado desde el proyecto SentinelOne con 3 fuentes independientes, todas del 2026-09-20: la API de SentinelOne (`sentinelone_api.py threats`) muestra que la ultima deteccion de cualquiera de los dos archivos es del 2026-09-15 (nada nuevo en 5 dias); la lista de exclusiones no tiene ningun hash de estos archivos (descarta que se este ocultando la deteccion); y una comprobacion SSH directa al servidor confirma que las 3 rutas exactas ya no existen en disco.
+- Causa real: el malware si se remedio de verdad el 2026-09-15 (borrado por SSH tras verificar SHA1 exacto contra SentinelOne, ver `SentinelOne/01-ESTADO.md` y `SentinelOne/15-MEMORIA-IA.md` de esa fecha), pero esa remediacion nunca se reflejo en este repo -- la entrada del 2026-09-14 y la fila de `01-ESTADO.md` se quedaron congeladas en el estado "sin remediar", que era correcto ese dia pero dejo de serlo al dia siguiente.
+- Corregida la fila correspondiente en `01-ESTADO.md` (se mantiene el historial original, se anade una nota de correccion fechada en vez de borrar lo que se escribio en su momento).
+
+**Archivos tocados:**
+- `01-ESTADO.md`, `15-MEMORIA-IA.md` (este archivo, este repo).
+
+**Siguiente acción sugerida:**
+- Si vuelve a aparecer un ticket o alerta citando estos archivos como malware activo, tratarlo como una reinfeccion nueva (no dar por hecho que es residuo de este caso) y verificar primero contra la API de SentinelOne y el servidor real antes de documentarlo como sin remediar.
+- Valorar si conviene un proceso mas explicito para sincronizar el estado de remediacion real (SentinelOne + servidor) con la documentacion de este repo cuando cambie, en vez de depender de que alguien lo actualice a mano.
+
 ## 2026-09-20 CEST
 **Tema:** Token de acceso personal de Zammad (sustituir password por token en la API)
 **Tipo:** Sesion
