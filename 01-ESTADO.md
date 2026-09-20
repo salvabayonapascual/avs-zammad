@@ -7,6 +7,7 @@
 - [x] API REST de Zammad verificada y documentada en la skill `.skills/zammad-api/`; nueva skill `.skills/zammad-tickets-pendientes/`.
 - [x] Eliminados 3 tickets duplicados de alerta ransomware TX2550M4 del 2026-08-30 (ver `03-DECISIONES.md`).
 - [x] Analizados los 69 tickets pendientes (2026-09-13): 46 son alertas NinjaOne duplicadas (TX2550M4/AVSP166), 23 distintos. Coordinado con SentinelOne: AVSP166 = 4 herramientas internas sin firmar, 26 detecciones, 8 sin resolver confirmadas por el usuario como falso positivo.
+- [x] Token de acceso personal de Zammad creado (2026-09-20): `api-avs-zammad-claude`, permisos admin+ticket.agent, guardado cifrado. Ya no depende de la contraseña para llamadas API.
 
 ## Completado al reabrir sesión (2026-09-13, tras reinicio de VSCode)
 
@@ -21,7 +22,7 @@ Detalle completo en `15-MEMORIA-IA.md` (entradas 2026-09-13 y 2026-09-14).
 
 ## Próxima acción recomendada
 
-- [ ] Generar un token de acceso personal en Zammad para dejar de usar la contraseña en llamadas API.
+- [x] Generado token de acceso personal en Zammad (`api-avs-zammad-claude`, permisos admin+ticket.agent) para dejar de usar la contraseña en llamadas API. Ver `15-MEMORIA-IA.md` 2026-09-20.
 - [ ] Decidir sobre los 36 tickets Zammad restantes y las detecciones SentinelOne de TX2550M4 (mismo patron que AVSP166, sin confirmar todavia).
 - [ ] Corregir `Documentacion/Conexion/RCLONE.cmd`: referencia `id_rsa`, que no existe en este equipo (el acceso real usa `id_ed25519`).
 - [ ] Completar `04-INVENTARIO.md` con el resto de datos técnicos del LXC (recursos, versión de Zammad, etc.).

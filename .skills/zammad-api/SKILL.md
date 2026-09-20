@@ -33,9 +33,15 @@ Verificado el 2026-08-30: ambos métodos de autenticación están habilitados en
 
 Usar token en vez de la contraseña siempre que sea posible (evita transmitir la contraseña real en cada llamada y se puede revocar sin cambiar la contraseña de la cuenta).
 
-1. Si no existe token aún, generarlo en la web: `Perfil > Token de acceso > Crear un Token de acceso personal` (elegir permisos mínimos necesarios).
-2. Guardar el token generado en `Documentacion/Privado/credenciales-zammad.md`, nunca en notas versionadas.
-3. Llamar a la API:
+Ya existe un token creado (2026-09-20): `api-avs-zammad-claude`, permisos `admin` + `ticket.agent` (cubre todo lo usado hasta ahora: tickets, usuarios, grupos, borrado). Guardado cifrado en `Documentacion/Privado/credenciales-zammad.md.enc`, sección "Token de acceso API". Desbloquear igual que el resto de credenciales (ver arriba) para usarlo.
+
+Si hay que crear uno nuevo (rotación, token filtrado, etc.):
+
+1. Via API (con Basic Auth): `POST /api/v1/user_access_token` con body `{"name":"<nombre>","permission":["admin","ticket.agent"]}`. La respuesta trae `{"token": "..."}` una sola vez — no se puede recuperar después, solo revocar y crear otro.
+   - Alternativa manual: `Perfil > Token de acceso > Crear un Token de acceso personal` en la web.
+2. Guardar el token generado en `Documentacion/Privado/credenciales-zammad.md` (desbloqueado), nunca en notas versionadas ni en claro.
+3. Revocar tokens viejos/de prueba: `DELETE /api/v1/user_access_token/:id` (listar con `GET /api/v1/user_access_token`).
+4. Llamar a la API: (nota: crear/listar tokens vía API implica ver el valor del token, lo que el auto-mode classifier del entorno bloquea por defecto como "Credential Materialization"/"Secret-Store Writes" — requiere una regla explícita en `autoMode.allow` de `.claude/settings.local.json`, ver la ya presente en este repo)
 
 ```bash
 curl -H "Authorization: Token token=<TOKEN>" https://zammad.avsconsulting.es/api/v1/groups
