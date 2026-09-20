@@ -24,6 +24,8 @@ Detalle completo en `15-MEMORIA-IA.md` (entradas 2026-09-13 y 2026-09-14).
 ## Próxima acción recomendada
 
 - [x] Generado token de acceso personal en Zammad (`api-avs-zammad-claude`, permisos admin+ticket.agent) para dejar de usar la contraseña en llamadas API. Ver `15-MEMORIA-IA.md` 2026-09-20.
-- [ ] Decidir sobre los 36 tickets Zammad restantes y las detecciones SentinelOne de TX2550M4 (mismo patron que AVSP166, sin confirmar todavia).
+- [x] **[2026-09-20] Limpieza de la nueva tanda de alertas NinjaOne duplicadas:** de 25 tickets abiertos con patrón `alerta ninjaone`, se cruzaron los 4 grupos (`AVSP165`, `AVSP97`, `TX2550M4` y el ticket suelto de fallo de parches) contra SentinelOne antes de decidir nada. Borrados 22 tickets confirmados `false_positive`/`resolved` en SentinelOne: `AVSP165` (2, caso `setup.exe` cerrado 16/09), `TX2550M4 / IDELAFUENTE` (16, `AVS_Toolbox.exe` sin firmar, mismo patrón recurrente de siempre), `TX2550M4 / MIGUEL` (2, `extendtext.exe`, fangame Pokémon) y `TX2550M4 / 5. AVS` (2, `EspacioGPT.exe`). Detalle e IDs en `15-MEMORIA-IA.md`.
+- [ ] **`AVSP97 / wsun` (tickets 111324, 111323) NO se ha tocado a propósito:** la amenaza en SentinelOne (`2570452559632847061`) sigue `unresolved`/`analystVerdict: undefined`, sin triar. No borrar estos tickets ni marcar la amenaza como falso positivo sin verificar antes el hash y el comportamiento (mismo criterio ya anotado en `99-NOTAS-IA.md`).
+- [ ] Ticket `111328` ("FALLO en aprobación automática de parches") tampoco se ha tocado: no es ruido de alerta duplicada, es el aviso real del bug de `graph_config()` en el LXC de NinjaOne pendiente de desplegar (ver `NinjaOne/01-ESTADO.md`).
 - [ ] Corregir `Documentacion/Conexion/RCLONE.cmd`: referencia `id_rsa`, que no existe en este equipo (el acceso real usa `id_ed25519`).
 - [ ] Completar `04-INVENTARIO.md` con el resto de datos técnicos del LXC (recursos, versión de Zammad, etc.).
