@@ -1,5 +1,19 @@
 # Memoria IA
 
+## 2026-09-21 CEST
+**Tema:** Ticket #111285 (acceso de `adomingo` a carpetas de Calidad/Operaciones) respondido y cerrado
+**Tipo:** Sesion (ejecutada desde el repositorio de mando `Datos/Clientes/AVS/general`)
+**Estado:** Aplicado
+
+**Ultimo contexto:**
+- El usuario reenvio un correo de Diego Liosi (ticket #111285, id interno 1287, cliente `dliosi@avsconsulting.es`) pidiendo acceso de `adomingo` a `S:\Calidad\01. GESTION DE LA CALIDAD` y `O:\Operaciones\03. PROCEDIMIENTOS - CALIDAD`. El acceso ya se habia concedido tecnicamente en el repo Primergy (ver `Servidor Primergy TX2550 M4.../_Sistema/08-HISTORICO.md`, 2026-09-21): tras un primer intento via grupos AD (`AVS-Calidad`/`AVS-Operaciones`) revertido por dar acceso a mas carpetas de las pedidas, se aplico ACL individual (`Modify`) solo en esas dos carpetas exactas, mas una entrada de traverse ("solo esta carpeta", sin heredar) en las raices `Calidad` y `Operaciones` para poder llegar hasta ellas.
+- La busqueda por titulo (`search_tickets`, que solo indexa `title:"..."`) no encontro el ticket porque su asunto es literalmente `@it` -- localizado en su lugar con una consulta directa `number:111285` contra `/tickets/search` (bypass del titulo-only de `zammad_api.py`, ver script `search_tickets`).
+- Respondido el ticket confirmando el acceso concedido, y cerrado (`PUT /tickets/1287` con `state_id: 4`). Verificado con una consulta posterior: `state: closed`.
+
+**Archivos tocados:** este archivo.
+
+**Siguiente accion:** ninguna. Si se necesita volver a buscar un ticket por numero cuando el titulo no lo contiene, usar `number:<numero>` directamente contra `/tickets/search`, no `search_tickets()` (que fuerza `title:"..."`).
+
 ## 2026-09-20 CEST (3)
 **Tema:** Limpieza de tanda nueva de alertas NinjaOne duplicadas (25 tickets abiertos, 22 borrados)
 **Tipo:** Sesion (ejecutada desde el repositorio de mando `Datos/Clientes/AVS/general`)
