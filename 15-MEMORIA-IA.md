@@ -1,5 +1,15 @@
 # Memoria IA
 
+## 2026-09-22 CEST
+**Tema:** Preferencia para cierre de tickets
+**Tipo:** Decisión operativa
+**Estado:** Aplicado en `.skills/zammad-responder-cerrar-ticket/SKILL.md`
+
+- Antes de cerrar cualquier ticket, preguntar siempre si el usuario quiere añadir una anotación interna o contestar públicamente al hilo de correo, y esperar el texto/decisión antes de publicar o cerrar.
+- Antes de cerrar, preguntar también prioridad, criticidad y categoría; si no se cambian, pedir confirmación expresa y conservar los valores actuales.
+
+**Resultado aplicado:** ticket #111334 (`id=1336`) de `AVS_Toolbox.exe` cerrado con anotación interna tras verificar que el archivo no estaba firmado y había sido eliminado del servidor. Categoría sin categoría; Zammad mantuvo `priority_id=2` porque no ofrece prioridad baja configurable.
+
 ## 2026-09-21 CEST
 **Tema:** Ticket #111285 (acceso de `adomingo` a carpetas de Calidad/Operaciones) respondido y cerrado
 **Tipo:** Sesion (ejecutada desde el repositorio de mando `Datos/Clientes/AVS/general`)

@@ -3,6 +3,8 @@
 Uso desde linea de comandos:
     python scripts/zammad_api.py search <query> [--state new|open|closed|all]
     python scripts/zammad_api.py get <id>
+    python scripts/zammad_api.py reply <id> <body> [--internal]
+    python scripts/zammad_api.py close <id> [--body <body>] [--internal]
     python scripts/zammad_api.py delete <id> [<id> ...]
 
 No expone el token en la salida. `search` usa el endpoint de busqueda con
@@ -109,6 +111,37 @@ def delete_ticket(token, ticket_id):
     return status
 
 
+def ticket_states(token):
+    status, data = _request("GET", "/ticket_states", token, params={"active": "true"})
+    if status != 200:
+        raise RuntimeError(f"Error {status}: {data}")
+    return data
+
+
+def state_id_by_name(token, name):
+    for state in ticket_states(token):
+        if str(state.get("name", "")).lower() == name.lower():
+            return state["id"]
+    raise RuntimeError(f"No se encontro el estado Zammad: {name}")
+
+
+def update_ticket(token, ticket_id, state_id=None, body=None, internal=False):
+    payload = {}
+    if state_id is not None:
+        payload["state_id"] = state_id
+    if body is not None:
+        payload["article"] = {
+            "subject": "Actualizacion de ticket",
+            "body": body,
+            "type": "note",
+            "internal": internal,
+        }
+    status, data = _request("PUT", f"/tickets/{ticket_id}", token, body=payload)
+    if status != 200:
+        raise RuntimeError(f"Error {status}: {data}")
+    return data
+
+
 def main():
     if len(sys.argv) < 2:
         print(__doc__)
@@ -126,6 +159,20 @@ def main():
         print(json.dumps(search_tickets(token, query, state), ensure_ascii=False, indent=2))
     elif cmd == "get":
         print(json.dumps(get_ticket(token, sys.argv[2]), ensure_ascii=False, indent=2))
+    elif cmd == "reply":
+        ticket_id = sys.argv[2]
+        internal = "--internal" in sys.argv[3:]
+        body = " ".join(arg for arg in sys.argv[3:] if arg != "--internal")
+        update_ticket(token, ticket_id, body=body, internal=internal)
+        print(f"id={ticket_id} replied=True internal={internal}")
+    elif cmd == "close":
+        ticket_id = sys.argv[2]
+        internal = "--internal" in sys.argv[3:]
+        body_index = next((i for i, arg in enumerate(sys.argv[3:], start=3) if arg == "--body"), None)
+        body = sys.argv[body_index + 1] if body_index is not None and body_index + 1 < len(sys.argv) else None
+        closed_id = state_id_by_name(token, "closed")
+        update_ticket(token, ticket_id, state_id=closed_id, body=body, internal=internal)
+        print(f"id={ticket_id} closed=True")
     elif cmd == "delete":
         for tid in sys.argv[2:]:
             status = delete_ticket(token, tid)
