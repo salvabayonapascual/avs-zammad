@@ -14,6 +14,19 @@
 
 **Siguiente accion:** ninguna inmediata. Si vuelve a aparecer una alerta de una herramienta interna AVS sin firmar, seguir el runbook de `SentinelOne/05-RUNBOOKS.md` ("Runbook: triage de ejecutables internos AVS") sin pedir confirmación, salvo que el nombre del ejecutable no coincida con el patrón ya conocido.
 
+---
+
+## 2026-09-23 CEST (continuación)
+**Tema:** Cerrado el ticket duplicado restante de `EspacioGPT.exe` (#111331)
+**Tipo:** Sesion
+**Estado:** Aplicado
+
+- `EspacioGPT` se añadió a la lista de herramientas cubiertas por la neutralización automática (ver `SentinelOne/03-DECISIONES.md`). Al revisar, quedaba sin cerrar el ticket #111331 (id 1333, ruta `@incidencias`), duplicado del ticket ya resuelto ayer (mismo threat `2573826924095948200`, ya `true_positive`/`resolved`, archivo ya eliminado el 2026-09-22). Respondido con nota interna y cerrado (`state_id: 4`), verificado con `GET /tickets/1333` directo.
+
+**Archivos tocados:** este archivo.
+
+**Siguiente accion:** ninguna.
+
 ## 2026-09-22 CEST
 **Tema:** Preferencia para cierre de tickets
 **Tipo:** Decisión operativa
