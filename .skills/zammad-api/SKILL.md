@@ -35,6 +35,7 @@ Verificado el 2026-08-30: ambos métodos de autenticación están habilitados en
 
 ```bash
 python scripts/zammad_api.py search "alerta ninjaone" --state=new
+python scripts/zammad_api.py pending
 python scripts/zammad_api.py get 1330
 python scripts/zammad_api.py delete 1330 1331
 ```

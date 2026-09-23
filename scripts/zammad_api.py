@@ -2,6 +2,7 @@
 
 Uso desde linea de comandos:
     python scripts/zammad_api.py search <query> [--state new|open|closed|all]
+    python scripts/zammad_api.py pending
     python scripts/zammad_api.py get <id>
     python scripts/zammad_api.py reply <id> <body> [--internal]
     python scripts/zammad_api.py close <id> [--body <body>] [--internal]
@@ -99,6 +100,27 @@ def search_tickets(token, query, state=None):
     return results
 
 
+def pending_tickets(token):
+    results = []
+    seen = set()
+    for state in ("new", "open"):
+        query = f"state.name:{state}"
+        status, data = _request("GET", "/tickets/search", token, params={"query": query, "limit": 200, "expand": "true"})
+        if status != 200:
+            raise RuntimeError(f"Error {status}: {data}")
+        for ticket in data:
+            if ticket.get("id") in seen:
+                continue
+            seen.add(ticket.get("id"))
+            results.append({
+                "id": ticket.get("id"),
+                "number": ticket.get("number"),
+                "title": ticket.get("title"),
+                "state": ticket.get("state"),
+            })
+    return results
+
+
 def get_ticket(token, ticket_id):
     status, data = _request("GET", f"/tickets/{ticket_id}", token)
     if status != 200:
@@ -157,6 +179,8 @@ def main():
                 state = a.split("=", 1)[1]
         query = " ".join(args)
         print(json.dumps(search_tickets(token, query, state), ensure_ascii=False, indent=2))
+    elif cmd == "pending":
+        print(json.dumps(pending_tickets(token), ensure_ascii=False, indent=2))
     elif cmd == "get":
         print(json.dumps(get_ticket(token, sys.argv[2]), ensure_ascii=False, indent=2))
     elif cmd == "reply":
