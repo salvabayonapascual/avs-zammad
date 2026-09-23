@@ -1,5 +1,19 @@
 # Memoria IA
 
+## 2026-09-23 CEST
+**Tema:** Neutralización automática permanente de `AVS_Toolbox.exe` sin firmar; 8 tickets duplicados cerrados
+**Tipo:** Sesion (ejecutada desde el repositorio de mando `Datos/Clientes/AVS/general`)
+**Estado:** Aplicado
+
+**Ultimo contexto:**
+- El usuario confirmó que la firma de código interna para herramientas AVS (planteada desde 2026-09-03, aprobada por gerencia 2026-09-17) no se va a implementar, y pidió que este patrón (herramienta interna AVS sin firma) se neutralice automáticamente y el ticket se cierre solo, sin pedir confirmación cada vez. Decisión completa registrada en `SentinelOne/03-DECISIONES.md`, no aquí.
+- Caso real: `AVS_Toolbox.exe` (`IDELAFUENTE`), 8 tickets duplicados (`111336`-`111343`, alternando rutas `@it`/`@incidencias`). Confirmado sin firma en SentinelOne, archivo eliminado del servidor (Primergy), amenaza marcada `true_positive`/`resolved`.
+- Los 8 tickets respondidos con nota interna y cerrados (`state_id: 4`). Detectado un lag de reindexado en la búsqueda de Zammad: el comando `pending` seguía listando 2 de los 8 tickets como si no estuvieran cerrados justo después de cerrarlos; verificado con `GET /tickets/<id>` directo que sí estaban `closed` de verdad -- no es un fallo del cierre, es un retraso del índice de búsqueda.
+
+**Archivos tocados:** este archivo.
+
+**Siguiente accion:** ninguna inmediata. Si vuelve a aparecer una alerta de una herramienta interna AVS sin firmar, seguir el runbook de `SentinelOne/05-RUNBOOKS.md` ("Runbook: triage de ejecutables internos AVS") sin pedir confirmación, salvo que el nombre del ejecutable no coincida con el patrón ya conocido.
+
 ## 2026-09-22 CEST
 **Tema:** Preferencia para cierre de tickets
 **Tipo:** Decisión operativa
