@@ -2,11 +2,17 @@
 
 Uso desde linea de comandos:
     python scripts/zammad_api.py search <query> [--state new|open|closed|all]
+    python scripts/zammad_api.py find <texto> [--state new|open|closed|pending|all]
+        [--group <grupo>] [--categoria <categoria>] [--since YYYY-MM-DD]
+        [--until YYYY-MM-DD] [--limit N] [--snippets]
     python scripts/zammad_api.py pending
     python scripts/zammad_api.py get <id>
     python scripts/zammad_api.py reply <id> <body> [--internal]
     python scripts/zammad_api.py close <id> [--body <body>] [--internal]
     python scripts/zammad_api.py delete <id> [<id> ...]
+
+`search` solo mira el titulo; `find` busca tambien en el cuerpo de los
+articulos (ver .skills/zammad-buscar-texto/SKILL.md).
 
 No expone el token en la salida. `search` usa el endpoint de busqueda con
 `expand=true` y devuelve una lista compacta (id, number, title, state,
@@ -121,6 +127,81 @@ def pending_tickets(token):
     return results
 
 
+def _plain(text):
+    """Minusculas y sin acentos, para comparar 'portátil' con 'PORTATIL'."""
+    import unicodedata
+    text = unicodedata.normalize("NFKD", text or "")
+    return "".join(c for c in text if not unicodedata.combining(c)).lower()
+
+
+def _html_to_text(body):
+    import html
+    text = re.sub(r"<(br|/p|/div)[^>]*>", "\n", body or "", flags=re.I)
+    text = re.sub(r"<[^>]+>", " ", text)
+    return re.sub(r"[ \t\r\f\v]+", " ", html.unescape(text)).strip()
+
+
+def find_tickets(token, text, state=None, group=None, categoria=None, since=None, until=None,
+                 limit=100, snippets=False):
+    """Busqueda de texto en titulo Y cuerpo de los articulos (indice de Zammad).
+
+    El indice de Zammad busca por palabras y admite comodines (`portatil*`), asi
+    que puede devolver tickets donde la cadena exacta no aparece. Con
+    snippets=True se leen los articulos de cada resultado, se busca la cadena
+    literal (sin distinguir mayusculas ni acentos) y se devuelve el contexto;
+    `literal=False` marca los resultados que solo casaron de forma aproximada.
+    """
+    q = f'"{text}"' if re.search(r"\s", text) and not text.startswith('"') else text
+    filters = []
+    if state and state != "all":
+        filters.append(f"state.name:{state}" if state != "pending" else
+                       "(state.name:new OR state.name:open OR state.name:\"pending reminder\" OR state.name:\"pending close\")")
+    if group:
+        filters.append(f'group.name:"{group}"')
+    if categoria:
+        filters.append(f'categoria:"{categoria}"')
+    if since or until:
+        filters.append(f"created_at:[{since or '*'} TO {until or '*'}]")
+    query = " AND ".join([f"({q})"] + filters)
+    status, data = _request("GET", "/tickets/search", token, params={
+        "query": query, "limit": limit, "expand": "true", "sort_by": "created_at", "order_by": "desc"})
+    if status != 200:
+        raise RuntimeError(f"Error {status}: {data}")
+    needle = _plain(text.strip('"').rstrip("*"))
+    results = []
+    for t in data:
+        item = {
+            "id": t.get("id"),
+            "number": t.get("number"),
+            "title": t.get("title"),
+            "state": t.get("state"),
+            "group": t.get("group"),
+            "categoria": t.get("categoria"),
+            "customer": t.get("customer"),
+            "created_at": (t.get("created_at") or "")[:10],
+        }
+        if snippets:
+            found = []
+            if needle in _plain(t.get("title")):
+                found.append({"where": "titulo", "text": t.get("title")})
+            st, arts = _request("GET", f"/ticket_articles/by_ticket/{t['id']}", token)
+            for a in (arts if st == 200 else []):
+                body = _html_to_text(a.get("body"))
+                pos = _plain(body).find(needle)
+                if pos >= 0:
+                    # _plain conserva la longitud salvo en ligaduras raras: basta para contexto
+                    found.append({
+                        "where": f"{(a.get('created_at') or '')[:10]} {(a.get('from') or '')[:40]}",
+                        "text": "..." + body[max(0, pos - 100):pos + len(needle) + 100].replace("\n", " ") + "...",
+                    })
+                    if len(found) >= 3:
+                        break
+            item["literal"] = bool(found)
+            item["matches"] = found
+        results.append(item)
+    return results
+
+
 def get_ticket(token, ticket_id):
     status, data = _request("GET", f"/tickets/{ticket_id}", token)
     if status != 200:
@@ -165,6 +246,8 @@ def update_ticket(token, ticket_id, state_id=None, body=None, internal=False):
 
 
 def main():
+    # La consola de Windows usa cp1252: sin esto, un acento o emoji en un ticket rompe la salida
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
     if len(sys.argv) < 2:
         print(__doc__)
         raise SystemExit(1)
@@ -179,6 +262,20 @@ def main():
                 state = a.split("=", 1)[1]
         query = " ".join(args)
         print(json.dumps(search_tickets(token, query, state), ensure_ascii=False, indent=2))
+    elif cmd == "find":
+        import argparse
+        p = argparse.ArgumentParser(prog="zammad_api.py find")
+        p.add_argument("text", nargs="+")
+        p.add_argument("--state", choices=["new", "open", "closed", "pending", "all"])
+        p.add_argument("--group")
+        p.add_argument("--categoria")
+        p.add_argument("--since", help="YYYY-MM-DD")
+        p.add_argument("--until", help="YYYY-MM-DD")
+        p.add_argument("--limit", type=int, default=100)
+        p.add_argument("--snippets", action="store_true")
+        a = p.parse_args(sys.argv[2:])
+        print(json.dumps(find_tickets(token, " ".join(a.text), a.state, a.group, a.categoria,
+                                      a.since, a.until, a.limit, a.snippets), ensure_ascii=False, indent=2))
     elif cmd == "pending":
         print(json.dumps(pending_tickets(token), ensure_ascii=False, indent=2))
     elif cmd == "get":
