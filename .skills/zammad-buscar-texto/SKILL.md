@@ -27,15 +27,18 @@ python scripts/zammad_api.py find <texto> [--state new|open|closed|pending|all]
     [--until YYYY-MM-DD] [--limit N] [--snippets]
 ```
 
-- `<texto>`: una palabra, varias (se busca la frase exacta) o con comodin (`portatil*`).
-  Admite sintaxis de busqueda de Zammad (`portatil OR laptop`).
+- `<texto>`: una palabra, varias palabras sueltas (se busca la frase exacta) o sintaxis de
+  busqueda de Zammad: comodines (`portatil*`), `OR`/`AND`/`NOT`, frases entre comillas
+  (`probook OR "galaxy book"`). Si lleva sintaxis se pasa tal cual y, con `--snippets`,
+  cada termino se comprueba por separado.
 - `--state pending`: new + open + pending reminder + pending close (lo no cerrado).
 - `--group`: nombre exacto del grupo, con la arroba (`@it`, `@altasybajas`, `@calidad`,
   `@innovacion`, `@incidencias`).
 - `--categoria`: campo personalizado "Categoria" (`Alta personal`, `Baja personal`,
   `Cambio de equipo`, `Compra material`, `Instalación - actualización`). **"Compra
   material" es una categoria, no un grupo.**
-- `--since/--until`: por fecha de creacion del ticket, ambos incluidos.
+- `--since/--until`: por fecha de creacion del ticket, ambos incluidos (se traducen a
+  `created_at:>=` / `<=`; Zammad devuelve 0 con rangos abiertos `[fecha TO *]`).
 - `--snippets`: lee los mensajes de cada resultado y devuelve hasta 3 fragmentos
   (±100 caracteres) donde aparece la cadena, sin distinguir mayusculas ni acentos.
   Mas lento (una llamada por ticket): usarlo cuando haya que explicar *que* dice el
@@ -50,6 +53,9 @@ Resultado: JSON ordenado del mas reciente al mas antiguo, con `id`, `number`, `t
 - El indice de Zammad busca por palabras y con cierta tolerancia: puede devolver
   tickets donde la cadena exacta no esta. Con `--snippets`, `literal: false` marca esos
   casos; descartarlos o mencionarlos aparte, no presentarlos como coincidencias.
+- No limitar a una categoria salvo que se pida: compras reales pueden estar sin categoria
+  (p. ej. reenvios de pedidos de HP Store de 2025-11, sin `categoria`). Buscar en todo y
+  despues agrupar.
 - Una busqueda por titulo no basta para "listar las compras de X": revisar tambien los
   tickets de la categoria cuyo titulo no lo dice (p. ej. "ORDENADOR VMORALES" era un
   portatil). Combinar `find` con `--categoria` y leer los fragmentos.

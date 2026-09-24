@@ -151,7 +151,10 @@ def find_tickets(token, text, state=None, group=None, categoria=None, since=None
     literal (sin distinguir mayusculas ni acentos) y se devuelve el contexto;
     `literal=False` marca los resultados que solo casaron de forma aproximada.
     """
-    q = f'"{text}"' if re.search(r"\s", text) and not text.startswith('"') else text
+    # Varias palabras sueltas = frase exacta; si ya trae sintaxis de busqueda
+    # (OR/AND/NOT, comodines, comillas, parentesis) se pasa tal cual.
+    has_syntax = re.search(r'\b(OR|AND|NOT)\b|[*"()]', text)
+    q = f'"{text}"' if re.search(r"\s", text) and not has_syntax else text
     filters = []
     if state and state != "all":
         filters.append(f"state.name:{state}" if state != "pending" else
@@ -160,14 +163,22 @@ def find_tickets(token, text, state=None, group=None, categoria=None, since=None
         filters.append(f'group.name:"{group}"')
     if categoria:
         filters.append(f'categoria:"{categoria}"')
-    if since or until:
-        filters.append(f"created_at:[{since or '*'} TO {until or '*'}]")
+    # Zammad no acepta rangos abiertos con '*' ([fecha TO *] devuelve 0): usar >= / <=
+    if since:
+        filters.append(f"created_at:>={since}")
+    if until:
+        filters.append(f"created_at:<={until}")
     query = " AND ".join([f"({q})"] + filters)
     status, data = _request("GET", "/tickets/search", token, params={
         "query": query, "limit": limit, "expand": "true", "sort_by": "created_at", "order_by": "desc"})
     if status != 200:
         raise RuntimeError(f"Error {status}: {data}")
-    needle = _plain(text.strip('"').rstrip("*"))
+    if has_syntax:
+        # Terminos de la consulta (frases entre comillas o palabras), sin operadores ni comodines
+        terms = [m[0] or m[1] for m in re.findall(r'"([^"]+)"|([^\s()"]+)', text)]
+        needles = [_plain(w.rstrip("*")) for w in terms if w not in ("OR", "AND", "NOT") and w.rstrip("*")]
+    else:
+        needles = [_plain(text)]
     results = []
     for t in data:
         item = {
@@ -182,13 +193,15 @@ def find_tickets(token, text, state=None, group=None, categoria=None, since=None
         }
         if snippets:
             found = []
-            if needle in _plain(t.get("title")):
+            if any(n in _plain(t.get("title")) for n in needles):
                 found.append({"where": "titulo", "text": t.get("title")})
             st, arts = _request("GET", f"/ticket_articles/by_ticket/{t['id']}", token)
             for a in (arts if st == 200 else []):
                 body = _html_to_text(a.get("body"))
-                pos = _plain(body).find(needle)
-                if pos >= 0:
+                plain = _plain(body)
+                hits = [(plain.find(n), n) for n in needles if plain.find(n) >= 0]
+                if hits:
+                    pos, needle = min(hits)
                     # _plain conserva la longitud salvo en ligaduras raras: basta para contexto
                     found.append({
                         "where": f"{(a.get('created_at') or '')[:10]} {(a.get('from') or '')[:40]}",

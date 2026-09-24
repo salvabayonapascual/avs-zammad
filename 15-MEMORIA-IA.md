@@ -9,6 +9,7 @@
 - Al listar las compras de portatiles de la categoria "Compra material" (es un valor del campo `categoria`, no un grupo) se vio que `search` solo mira el titulo y se perdian tickets como "ORDENADOR VMORALES" o "RV: AVS - SOLICITUD PEDIDO", que solo mencionan el modelo dentro de los mensajes.
 - Anadido `find <texto>` (titulo + cuerpo de articulos) con filtros `--state/--group/--categoria/--since/--until/--limit` y `--snippets` (fragmento de contexto y marca `literal` para descartar coincidencias aproximadas del indice). Probado: `find ProBook --categoria "Compra material" --snippets` devuelve 4 tickets, todos con coincidencia literal. Salida forzada a UTF-8 (la consola cp1252 rompia con acentos).
 - Nueva skill `.skills/zammad-buscar-texto/SKILL.md`, enlazada desde `.skills/README.md`.
+- Corregido el mismo dia al usarlo de verdad (la primera prueba no cubria estos casos): consultas con `OR`/comodines se envolvian como frase exacta (0 resultados); `--since/--until` usaba `[fecha TO *]`, que Zammad no acepta (0 resultados), ahora `>=`/`<=`; `--snippets` buscaba la consulta entera como literal, ahora cada termino.
 
 **Archivos tocados:** `scripts/zammad_api.py`, `.skills/zammad-buscar-texto/SKILL.md`, `.skills/README.md`, este archivo.
 
