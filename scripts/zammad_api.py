@@ -168,7 +168,11 @@ def find_tickets(token, text, state=None, group=None, categoria=None, since=None
         filters.append(f"created_at:>={since}")
     if until:
         filters.append(f"created_at:<={until}")
-    query = " AND ".join([f"({q})"] + filters)
+    # Sin texto (o solo '*') se filtra unicamente por los demas criterios: Zammad devuelve 0 con '(*)'
+    text_clause = [] if text.strip() in ("", "*") else [f"({q})"]
+    if not text_clause and not filters:
+        raise SystemExit("find sin texto necesita al menos un filtro (--state, --group, --categoria, --since, --until)")
+    query = " AND ".join(text_clause + filters)
     status, data = _request("GET", "/tickets/search", token, params={
         "query": query, "limit": limit, "expand": "true", "sort_by": "created_at", "order_by": "desc"})
     if status != 200:
@@ -179,6 +183,8 @@ def find_tickets(token, text, state=None, group=None, categoria=None, since=None
         needles = [_plain(w.rstrip("*")) for w in terms if w not in ("OR", "AND", "NOT") and w.rstrip("*")]
     else:
         needles = [_plain(text)]
+    if not text_clause:
+        snippets = False  # sin texto no hay nada que resaltar
     results = []
     for t in data:
         item = {
@@ -278,7 +284,7 @@ def main():
     elif cmd == "find":
         import argparse
         p = argparse.ArgumentParser(prog="zammad_api.py find")
-        p.add_argument("text", nargs="+")
+        p.add_argument("text", nargs="*", help="Texto a buscar; vacio o '*' = solo filtros")
         p.add_argument("--state", choices=["new", "open", "closed", "pending", "all"])
         p.add_argument("--group")
         p.add_argument("--categoria")

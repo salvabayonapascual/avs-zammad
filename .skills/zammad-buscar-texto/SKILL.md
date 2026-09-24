@@ -31,6 +31,8 @@ python scripts/zammad_api.py find <texto> [--state new|open|closed|pending|all]
   busqueda de Zammad: comodines (`portatil*`), `OR`/`AND`/`NOT`, frases entre comillas
   (`probook OR "galaxy book"`). Si lleva sintaxis se pasa tal cual y, con `--snippets`,
   cada termino se comprueba por separado.
+  Sin texto (o `"*"`) se lista todo lo que cumpla los filtros, p. ej.
+  `find --categoria "Compra material" --since 2026-07-01` (hace falta al menos un filtro).
 - `--state pending`: new + open + pending reminder + pending close (lo no cerrado).
 - `--group`: nombre exacto del grupo, con la arroba (`@it`, `@altasybajas`, `@calidad`,
   `@innovacion`, `@incidencias`).
