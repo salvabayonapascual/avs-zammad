@@ -50,6 +50,14 @@ Resultado: JSON ordenado del mas reciente al mas antiguo, con `id`, `number`, `t
 `state`, `group`, `categoria`, `customer`, `created_at` y, con `--snippets`,
 `literal` + `matches`.
 
+## Antes de cambiar `find`
+
+Ejecutar `python scripts/test_zammad_find.py` (solo lectura, contra tickets historicos
+conocidos) antes y despues de tocar `find_tickets` o `_request`, y no subir el cambio si
+falla algo. Cubre los fallos reales de la primera version: texto solo en el cuerpo,
+`OR`/comodines, filtros de fecha, busqueda solo por filtros, snippets por termino y frase
+con acento. Si se corrige un fallo nuevo, anadir su caso a ese script.
+
 ## Interpretar los resultados
 
 - El indice de Zammad busca por palabras y con cierta tolerancia: puede devolver

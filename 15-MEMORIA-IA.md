@@ -1,5 +1,20 @@
 # Memoria IA
 
+## 2026-09-24 CEST (continuación)
+**Tema:** Pruebas fijas de `find` (`scripts/test_zammad_find.py`)
+**Tipo:** Estructural
+**Estado:** Aplicado y validado
+
+**Ultimo contexto:**
+- Mejora de proceso pedida por el usuario: `find` se dio por probado con un solo caso y tenia 4 fallos que solo salieron al usarlo. Nuevo script de pruebas en solo lectura con 9 casos (uno por cada fallo real). Pasa entero; validado ademas que detecta un fallo reintroducido a proposito (sintaxis de fechas antigua -> 2 pruebas fallan).
+- La skill `zammad-buscar-texto` obliga a ejecutarlo antes de subir cambios de `find`.
+
+**Archivos tocados:** `scripts/test_zammad_find.py`, `.skills/zammad-buscar-texto/SKILL.md`, este archivo.
+
+**Siguiente accion:** ninguna.
+
+---
+
 ## 2026-09-24 CEST
 **Tema:** Nuevo comando `find` en `zammad_api.py` y skill `zammad-buscar-texto`
 **Tipo:** Estructural (ejecutada desde el repositorio de mando `Datos/Clientes/AVS/general`)
