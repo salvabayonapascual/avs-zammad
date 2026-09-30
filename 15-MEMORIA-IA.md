@@ -1,5 +1,18 @@
 # Memoria IA
 
+## 2026-09-30
+**Tema:** Cierre de diez tickets duplicados de AVS_Toolbox tras triage verificado en SentinelOne.
+**Tipo:** Sesion (coordinacion iniciada desde el repositorio de mando).
+**Estado:** Aplicado y verificado.
+
+**Resumen:**
+- Cerrados con nota interna los tickets #111359-#111368, dos por cada uno de cinco threat IDs de `AVS_Toolbox.exe`.
+- SentinelOne verifico las cinco detecciones como no firmadas; los archivos se borraron del servidor tras confirmar cada ruta y su ausencia posterior. Los cinco threats quedaron `true_positive`/`resolved`.
+- Cada ticket se verifico por GET directo como cerrado (`state_id=4`). No se borraron tickets ni se tocaron otros avisos.
+
+**Archivos tocados:** `01-ESTADO.md`, este archivo. Evidencia API en SentinelOne y notas internas en los diez tickets.
+**Siguiente accion:** ninguna para esta tanda; los nuevos tickets de otras causas siguen su propio triage.
+
 ## 2026-09-24 CEST (continuación)
 **Tema:** Pruebas fijas de `find` (`scripts/test_zammad_find.py`)
 **Tipo:** Estructural

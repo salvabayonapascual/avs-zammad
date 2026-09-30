@@ -1,9 +1,9 @@
 # Estado
 
-> **Resumen rápido** · Última actualización: 2026-09-25
+> **Resumen rápido** · Última actualización: 2026-09-30
 > **Alta:** ninguno abierto ahora mismo.
 > **Media:** corregir `Documentacion/Conexion/RCLONE.cmd` (referencia una clave que no existe); completar `04-INVENTARIO.md` con datos técnicos del LXC. El recibo de SyncBack Pro del ticket 111121 contiene la clave de licencia en claro: decidir si se elimina ese artículo/adjunto de Zammad.
-> **Último cambio (2026-09-24):** nuevo comando `zammad_api.py find` (título y mensajes, filtros por estado/grupo/categoría/fechas) con pruebas fijas en `scripts/test_zammad_find.py`; skill `zammad-buscar-texto`.
+> **Último cambio (2026-09-30):** cerrados diez tickets duplicados de cinco detecciones sin firma de AVS_Toolbox tras el triage automático de SentinelOne; detalle y prueba en `15-MEMORIA-IA.md` del 2026-09-30.
 > Detalle completo más abajo.
 
 ## Situación actual
