@@ -6,3 +6,8 @@ Se eliminaron (borrado permanente, no cierre) los tickets #111253, #111251 y #11
 
 - **Motivo:** confirmado por el usuario que eran tickets a eliminar tras verificar por contenido (Threat ID, Device ID, fecha) que correspondían exactamente a las capturas mostradas.
 - **Pendiente:** existen más tickets históricos con el mismo patrón para TX2550M4 (usuarios sbayona, KGOMEZ, 5S, JUANMA) en fechas previas, no eliminados. Evaluar si la detección es un falso positivo recurrente y ajustar la regla de origen (NinjaOne/SentinelOne) en vez de seguir borrando tickets manualmente.
+
+
+## 2026-10-02 - Responsabilidad de @autorizaciones
+
+Peticion explicita del usuario sobre #111373: Diego Liosi es propietario por defecto; Diego y Salva reciben seguimiento. Salva no responde hasta que le traspasen el ticket mediante reasignacion. Es un criterio operativo, no un bloqueo tecnico de respuesta: ambos necesitan permisos para gestionar el traspaso. No reasignar automaticamente a Diego en cada respuesta.

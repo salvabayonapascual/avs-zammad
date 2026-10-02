@@ -1,9 +1,9 @@
 # Estado
 
-> **Resumen rápido** · Última actualización: 2026-09-30
+> **Resumen rápido** · Última actualización: 2026-10-02
 > **Alta:** ninguno abierto ahora mismo.
-> **Media:** corregir `Documentacion/Conexion/RCLONE.cmd` (referencia una clave que no existe); completar `04-INVENTARIO.md` con datos técnicos del LXC. El recibo de SyncBack Pro del ticket 111121 contiene la clave de licencia en claro: decidir si se elimina ese artículo/adjunto de Zammad.
-> **Último cambio (2026-09-30):** cerrados diez tickets duplicados de cinco detecciones sin firma de AVS_Toolbox tras el triage automático de SentinelOne; detalle y prueba en `15-MEMORIA-IA.md` del 2026-09-30.
+> **Media:** corregir `Documentacion/Conexion/RCLONE.cmd` (referencia una clave que no existe); completar `04-INVENTARIO.md` con datos técnicos del LXC. El recibo de SyncBack Pro del ticket 111121 contiene la clave de licencia en claro: decidir si se elimina ese artículo/adjunto de Zammad. Comprobar entrega real de avisos @autorizaciones a Diego y Salva.
+> **Ultimo cambio (2026-10-02):** creado @autorizaciones; propietario inicial Diego, suscripcion de ambos y traspaso manual probado. Detalle en 10-VALIDACIONES y 15-MEMORIA-IA.
 > Detalle completo más abajo.
 
 ## Situación actual
