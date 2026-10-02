@@ -307,3 +307,11 @@
 - Cambio local previo en scripts/zammad_api.py preservado y excluido de este guarda.
 
 **Siguiente accion:** comprobar la recepcion de un correo real con asunto @autorizaciones en dliosi@avsconsulting.es y sat@nexo.net. Diego atiende inicialmente; Salva interviene al recibir la reasignacion.
+
+
+## 2026-10-02 11:42 - Respuesta a Diego en #111373
+**Tipo:** Sesion
+**Estado:** Aplicado
+**Tema:** Respuesta por correo solicitada por el usuario.
+**Ultimo contexto:** Enviado un unico articulo email publico (4551) a dliosi@avsconsulting.es en el ticket #111373 (id 1375). Confirma grupo @autorizaciones, uso del asunto, propiedad inicial Diego, seguimiento de ambos y traspaso manual a Salva; solicita confirmar recepcion del primer aviso. GET posterior: estado open. No se cerro el ticket. Cambio local previo de scripts/zammad_api.py preservado.
+**Siguiente accion:** esperar confirmacion de Diego sobre recepcion de avisos.
