@@ -1,9 +1,37 @@
 ---
 name: zammad-responder-cerrar-ticket
-description: "Use when the user asks to answer, update or close a Zammad ticket. Resolve the visible ticket number to its internal ID, inspect the ticket, require explicit target confirmation, post one reply, and optionally close only that ticket."
+description: "Use when the user asks to read, answer, update or close a Zammad ticket. Read it with `show` (accepts the visible number), draft the reply, SHOW THE EXACT TEXT AND WAIT FOR APPROVAL, send it by email with `email` (not `reply`, which only creates a note), verify, and optionally close only that ticket."
 ---
 
-# Responder y cerrar tickets Zammad
+# Leer, responder y cerrar tickets Zammad
+
+## Leer y responder a un usuario (flujo habitual)
+
+**Regla (preferencia del usuario, `general/07b-PREFERENCIAS-IA.md`, 2026-10-02):** "contesta al ticket" autoriza a **preparar** la respuesta, no a enviarla. Siempre se muestra el texto completo y se espera la aprobación explícita antes de enviar.
+
+1. **Leer** (acepta el número visible, p. ej. `111370`, o el id interno):
+   ```
+   python scripts/zammad_api.py show <numero> [--max-chars 1500]
+   ```
+   Muestra título, estado, grupo, cliente y la conversación limpia (sin el acuse automático).
+2. **Redactar** el borrador en el tono del usuario: breve, cercano, en castellano, saludo con el nombre ("Hola Sergio:"), cierre corto ("Gracias.", "Un abrazo."). Sin firma: Zammad añade la del agente. No inventar datos ni compromisos que el usuario no haya dicho; si se añade algo propio (p. ej. el correo de otra persona sacado de otro ticket), decirlo al presentar el borrador.
+3. **Mostrar y esperar aprobación.** Presentar en el chat: destinatario (correo), número y título del ticket, y el **texto exacto** tal cual se enviará. Preguntar también si después se deja abierto o se cierra. No enviar nada sin un "sí"/"envíalo" explícito; si el usuario corrige el texto, volver a mostrar la versión final antes de enviarla.
+4. **Comprobar en seco** con el texto aprobado guardado en un fichero UTF-8 (así no se rompen acentos ni comillas):
+   ```
+   python scripts/zammad_api.py email <numero> --file <borrador.txt> --dry-run
+   ```
+   Cada línea en blanco del fichero separa un párrafo. Debe salir el mismo texto aprobado y el destinatario correcto.
+5. **Enviar** el mismo fichero sin `--dry-run`. El comando crea un artículo de tipo `email`, visible, al cliente del ticket (o a `--to`), y verifica después que ha quedado como correo visible:
+   ```
+   python scripts/zammad_api.py email <numero> --file <borrador.txt>
+   ```
+6. **Informar** al usuario de lo enviado y del estado en que queda el ticket (al responder, Zammad suele pasarlo de `new` a `open`). Cerrar solo si lo pide (paso 7 del flujo de abajo). Borrar el fichero del borrador.
+
+**Por qué `email` y no `reply`:** `reply` crea un artículo de tipo **nota**; aunque no sea interna, **no se envía por correo** al usuario. Detectado el 2026-09-30 al contestar los tickets #111357 y #111370, que hubo que enviar construyendo el correo a mano. `reply` queda para notas internas (`--internal`).
+
+---
+
+# Detalle: responder, anotar y cerrar
 
 ## Regla principal
 
@@ -58,11 +86,9 @@ python scripts\zammad_api.py get <id_interno>
   quiere añadir nada, continuar sin artículo. Si prioridad, criticidad o
   categoría no se cambian, debe confirmarlo expresamente.
 
-6. Publicar una respuesta externa o una nota interna, según se haya pedido:
+6. Publicar una respuesta al usuario o una nota interna, según se haya pedido.
 
-```powershell
-python scripts\zammad_api.py reply <id_interno> "<respuesta>"
-```
+Respuesta al usuario (correo): **siempre con el flujo de arriba** (borrador mostrado y aprobado, `email --dry-run`, `email`). No usar `reply` para esto: no envía correo.
 
 Para nota interna:
 

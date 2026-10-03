@@ -1,9 +1,9 @@
 # Estado
 
-> **Resumen rápido** · Última actualización: 2026-10-02
+> **Resumen rápido** · Última actualización: 2026-10-03
 > **Alta:** ninguno abierto ahora mismo.
 > **Media:** corregir `Documentacion/Conexion/RCLONE.cmd` (referencia una clave que no existe); completar `04-INVENTARIO.md` con datos técnicos del LXC. El recibo de SyncBack Pro del ticket 111121 contiene la clave de licencia en claro: decidir si se elimina ese artículo/adjunto de Zammad. Comprobar entrega real de avisos @autorizaciones a Diego y Salva.
-> **Ultimo cambio (2026-10-02):** creado @autorizaciones; propietario inicial Diego, suscripcion de ambos y traspaso manual probado. Detalle en 10-VALIDACIONES y 15-MEMORIA-IA.
+> **Ultimo cambio (2026-10-03):** nuevos comandos `show` (leer un ticket por su numero visible) y `email` (responder por correo; `reply` solo crea notas) y skill `zammad-responder-cerrar-ticket` con aprobacion obligatoria del texto antes de enviar. Anterior (2026-10-02): creado @autorizaciones.
 > Detalle completo más abajo.
 
 ## Situación actual

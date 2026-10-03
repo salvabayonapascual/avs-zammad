@@ -7,12 +7,20 @@ Uso desde linea de comandos:
         [--until YYYY-MM-DD] [--limit N] [--snippets]
     python scripts/zammad_api.py pending
     python scripts/zammad_api.py get <id>
+    python scripts/zammad_api.py show <numero|id> [--max-chars N]
+    python scripts/zammad_api.py email <numero|id> (--file F | --stdin) [--to X] [--dry-run]
     python scripts/zammad_api.py reply <id> <body> [--internal]
     python scripts/zammad_api.py close <id> [--body <body>] [--internal]
     python scripts/zammad_api.py delete <id> [<id> ...]
 
 `search` solo mira el titulo; `find` busca tambien en el cuerpo de los
 articulos (ver .skills/zammad-buscar-texto/SKILL.md).
+
+`show` lee un ticket por su numero visible (o su id) y muestra la conversacion.
+`email` responde al usuario POR CORREO (articulo tipo email, visible). OJO:
+`reply` crea una NOTA, que no se envia por correo al usuario aunque no sea
+interna; para contestar al usuario usar `email` (ver
+.skills/zammad-responder-cerrar-ticket/SKILL.md).
 
 No expone el token en la salida. `search` usa el endpoint de busqueda con
 `expand=true` y devuelve una lista compacta (id, number, title, state,
@@ -264,6 +272,70 @@ def update_ticket(token, ticket_id, state_id=None, body=None, internal=False):
     return data
 
 
+def resolve_ticket(token, ref):
+    """Ticket (expandido) a partir del numero visible (p. ej. 111370) o del id interno.
+
+    El numero visible y el id interno son distintos; confundirlos actua sobre otro ticket.
+    Se prueba primero como numero visible; solo si no existe, como id.
+    """
+    ref = str(ref).strip().lstrip("#")
+    status, data = _request("GET", "/tickets/search", token,
+                            params={"query": f"number:{ref}", "limit": 5, "expand": "true"})
+    if status == 200 and isinstance(data, list):
+        exactos = [t for t in data if str(t.get("number")) == ref]
+        if len(exactos) == 1:
+            return exactos[0]
+    status, data = _request("GET", f"/tickets/{ref}", token, params={"expand": "true"})
+    if status == 200 and isinstance(data, dict) and data.get("id"):
+        return data
+    raise SystemExit(f"No se encontro ningun ticket con numero o id {ref}")
+
+
+def show_ticket(token, ref, max_chars=1500):
+    tk = resolve_ticket(token, ref)
+    print(f"#{tk.get('number')} (id {tk['id']}) | {tk.get('title')}")
+    print(f"estado: {tk.get('state')} | grupo: {tk.get('group')} | cliente: {tk.get('customer')} | "
+          f"categoria: {tk.get('categoria')} | creado: {(tk.get('created_at') or '')[:16]}")
+    status, arts = _request("GET", f"/ticket_articles/by_ticket/{tk['id']}", token)
+    for a in (arts if status == 200 else []):
+        texto = _html_to_text(a.get("body"))
+        if "Hemos recibido su solicitud" in texto:
+            continue
+        marca = "NOTA INTERNA" if a.get("internal") else a.get("type")
+        print(f"\n--- {(a.get('created_at') or '')[:16]} | {marca} | de: {a.get('from')} | para: {a.get('to') or '-'}")
+        print(texto[:max_chars] + (" [...]" if len(texto) > max_chars else ""))
+    return tk
+
+
+def send_email_reply(token, ref, text, to=None, dry_run=False):
+    """Responde por correo al usuario del ticket (articulo 'email', visible, enviado por Zammad).
+
+    `text` es texto plano; cada linea en blanco separa un parrafo. Devuelve el articulo creado.
+    """
+    import html as _html
+    tk = resolve_ticket(token, ref)
+    destinatario = to or tk.get("customer")
+    if not destinatario or "@" not in destinatario:
+        raise SystemExit(f"No hay un correo de destinatario valido ({destinatario!r}); indicar --to")
+    parrafos = [p.strip() for p in text.replace("\r\n", "\n").split("\n\n") if p.strip()]
+    cuerpo = "".join("<p>" + _html.escape(p).replace("\n", "<br>") + "</p>" for p in parrafos)
+    asunto = "Re: " + (tk.get("title") or "")
+    if dry_run:
+        print(f"[PRUEBA, no se envia] #{tk.get('number')} (id {tk['id']}) -> {destinatario} | asunto: {asunto}")
+        print("\n\n".join(parrafos))
+        return None
+    status, data = _request("PUT", f"/tickets/{tk['id']}", token, body={"article": {
+        "subject": asunto, "body": cuerpo, "content_type": "text/html", "type": "email",
+        "sender": "Agent", "to": destinatario, "internal": False}})
+    if status != 200:
+        raise RuntimeError(f"Error {status}: {data}")
+    status, arts = _request("GET", f"/ticket_articles/by_ticket/{tk['id']}", token)
+    ultimo = arts[-1] if status == 200 and arts else {}
+    if ultimo.get("type") != "email" or ultimo.get("internal"):
+        raise RuntimeError("La respuesta no quedo como correo visible; revisar el ticket en la web")
+    return ultimo
+
+
 def main():
     # La consola de Windows usa cp1252: sin esto, un acento o emoji en un ticket rompe la salida
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
@@ -299,6 +371,27 @@ def main():
         print(json.dumps(pending_tickets(token), ensure_ascii=False, indent=2))
     elif cmd == "get":
         print(json.dumps(get_ticket(token, sys.argv[2]), ensure_ascii=False, indent=2))
+    elif cmd == "show":
+        import argparse
+        p = argparse.ArgumentParser(prog="zammad_api.py show")
+        p.add_argument("ref")
+        p.add_argument("--max-chars", type=int, default=1500)
+        a = p.parse_args(sys.argv[2:])
+        show_ticket(token, a.ref, a.max_chars)
+    elif cmd == "email":
+        import argparse
+        p = argparse.ArgumentParser(prog="zammad_api.py email")
+        p.add_argument("ref")
+        g = p.add_mutually_exclusive_group(required=True)
+        g.add_argument("--file", help="Fichero UTF-8 con el texto aprobado por el usuario")
+        g.add_argument("--stdin", action="store_true")
+        p.add_argument("--to", help="Destinatario (por defecto, el cliente del ticket)")
+        p.add_argument("--dry-run", action="store_true", help="Muestra lo que se enviaria, sin enviar")
+        a = p.parse_args(sys.argv[2:])
+        text = open(a.file, encoding="utf-8").read() if a.file else sys.stdin.read()
+        art = send_email_reply(token, a.ref, text, a.to, a.dry_run)
+        if art:
+            print(f"Enviado: {art.get('created_at', '')[:16]} | {art.get('type')} | para: {art.get('to')} | interno: {art.get('internal')}")
     elif cmd == "reply":
         ticket_id = sys.argv[2]
         internal = "--internal" in sys.argv[3:]

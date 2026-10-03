@@ -1,5 +1,21 @@
 # Memoria IA
 
+## 2026-10-03
+**Tema:** Leer y responder tickets: comandos `show` y `email`, y aprobacion obligatoria del texto
+**Tipo:** Estructural
+**Estado:** Aplicado y probado (sin enviar nada)
+
+**Ultimo contexto:**
+- El usuario pidio una skill para leer y responder tickets mostrando antes la respuesta para aprobarla. Ya existia `zammad-responder-cerrar-ticket`, pero su "respuesta externa" usaba `reply`, que crea una **nota**: no llega por correo al usuario (visto el 2026-09-30 con #111357 y #111370, que hubo que enviar armando el correo a mano).
+- `zammad_api.py`: `show <numero|id>` (resuelve el numero visible, muestra la conversacion limpia) y `email <numero|id> --file F [--dry-run] [--to X]` (articulo `email` visible al cliente; texto desde fichero UTF-8; verifica que quedo como correo visible). Probados `show` por numero y por id, ticket inexistente y `email --dry-run` con acentos; `test_zammad_find.py` sigue en verde. No se ha enviado ningun correo de prueba.
+- Skill reescrita con el flujo: leer, redactar, **mostrar el texto exacto y esperar aprobacion**, `--dry-run`, enviar, informar del estado. Coincide con la preferencia del usuario del 2026-10-02 en `general/07b-PREFERENCIAS-IA.md`.
+
+**Archivos tocados:** `scripts/zammad_api.py`, `.skills/zammad-responder-cerrar-ticket/SKILL.md`, `.skills/README.md`, `01-ESTADO.md`, este archivo.
+
+**Siguiente accion:** usar el flujo en la proxima respuesta real y confirmar que el correo llega.
+
+---
+
 ## 2026-09-30
 **Tema:** Cierre de diez tickets duplicados de AVS_Toolbox tras triage verificado en SentinelOne.
 **Tipo:** Sesion (coordinacion iniciada desde el repositorio de mando).
