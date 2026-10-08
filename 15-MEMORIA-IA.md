@@ -331,3 +331,9 @@
 **Tema:** Respuesta por correo solicitada por el usuario.
 **Ultimo contexto:** Enviado un unico articulo email publico (4551) a dliosi@avsconsulting.es en el ticket #111373 (id 1375). Confirma grupo @autorizaciones, uso del asunto, propiedad inicial Diego, seguimiento de ambos y traspaso manual a Salva; solicita confirmar recepcion del primer aviso. GET posterior: estado open. No se cerro el ticket. Cambio local previo de scripts/zammad_api.py preservado.
 **Siguiente accion:** esperar confirmacion de Diego sobre recepcion de avisos.
+
+## 2026-10-08 16:22 CEST
+**Tipo:** Sesion
+**Tema:** Consulta sobre tickets de avisos Passbolt.
+**Ultimo contexto:** API en solo lectura: ticket #111386 (id 1388), aviso de activacion enviado por Passbolt_AVS <soporte@avsconsulting.es> a soporte@avsconsulting.es, recogido como email en @it. Consultados postmaster_filters: seis filtros activos por prefijo de asunto, ninguno excluye Passbolt. email_addresses confirma soporte activo en canal 4. No se modificaron filtros ni tickets.
+**Siguiente accion:** si el usuario solicita reducir el ruido, definir un filtro especifico para avisos informativos, preservando recuperaciones y alertas de seguridad.
