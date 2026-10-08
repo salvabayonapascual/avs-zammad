@@ -1,9 +1,9 @@
 # Estado
 
-> **Resumen rápido** · Última actualización: 2026-10-03
+> **Resumen rápido** · Última actualización: 2026-10-08
 > **Alta:** ninguno abierto ahora mismo.
-> **Media:** corregir `Documentacion/Conexion/RCLONE.cmd` (referencia una clave que no existe); completar `04-INVENTARIO.md` con datos técnicos del LXC. El recibo de SyncBack Pro del ticket 111121 contiene la clave de licencia en claro: decidir si se elimina ese artículo/adjunto de Zammad. Comprobar entrega real de avisos @autorizaciones a Diego y Salva.
-> **Ultimo cambio (2026-10-03):** nuevos comandos `show` (leer un ticket por su numero visible) y `email` (responder por correo; `reply` solo crea notas) y skill `zammad-responder-cerrar-ticket` con aprobacion obligatoria del texto antes de enviar. Anterior (2026-10-02): creado @autorizaciones.
+> **Media:** ninguno de los tres avisos revisados requiere intervención operativa. Los demás tickets se consultan en vivo, sin reutilizar el listado histórico de esta nota.
+> **Ultimo cambio (2026-10-08):** corregido RCLONE y validado SFTP con identidad dedicada; licencia de #111121 saneada en cuerpo, HTML, MIME e índice, con copia cifrada recuperable; avisos @autorizaciones verificados en entradas reales y canal SMTP activo/OK. No se ha comprobado la recepción final en buzones. Montar Z: sigue requiriendo instalar WinFsp en este equipo; es una dependencia de la herramienta local, no un fallo del servicio. Evidencia en `10-VALIDACIONES.md`.
 > Detalle completo más abajo.
 
 ## Situación actual
@@ -19,7 +19,7 @@
 
 - [x] SentinelOne: 8 amenazas AVSP166 marcadas `false_positive` + `resolved` (reintento tras bloqueo transitorio del classifier).
 - [x] Zammad: 10 tickets AVSP166 borrados via API (ids internos 1249,1250,1259,1260,1261,1262,1264,1265,1272,1273 -- verificados contra su `number`/`title` antes de borrar).
-- [ ] `git push origin main` en este repo sigue sin completarse: el classifier ya deja pasar el intento, pero GitHub rechaza la deploy key de este repo por permiso de solo lectura (`salvabayonapascual/avs-zammad.git`) -- hay que darle permiso de escritura en GitHub, no es algo resoluble desde aqui. 2 commits locales listos esperando.
+- [x] Incidencia histórica de `git push origin main` cerrada el 2026-09-14; ver resolución y clave dedicada más abajo.
 - [x] Creada skill `.skills/ninjaone-alertas-duplicadas/SKILL.md` (flujo completo: identificar en Zammad, investigar en SentinelOne, confirmar con el usuario, marcar y borrar) para repetir este proceso con otros equipos (empezando por TX2550M4).
 - [x] `git push` resuelto (2026-09-14): la clave por defecto del equipo ya era deploy key de otro repo. Generada clave dedicada `id_ed25519_zammad`, alias `github.com-zammad-avs` en `~/.ssh/config`, remote actualizado y deploy key con permiso de escritura anadida en GitHub. Repo sincronizado con `origin/main`.
 - [x] TX2550M4 (2026-09-14): borrados los 36 tickets Zammad del patron NinjaOne duplicado, a peticion expresa del usuario tras confirmar que queria borrarlos sin distincion. En su momento, la investigacion en SentinelOne encontro que parte de este ruido correspondia a malware real sin remediar (`Formulario.exe`, `v2.1.6.zip`, veredicto `true_positive`) -- no se marco nada como falso positivo en SentinelOne. Ver `15-MEMORIA-IA.md` 2026-09-14 15:40 CEST para el detalle original.
@@ -32,6 +32,9 @@ Detalle completo en `15-MEMORIA-IA.md` (entradas 2026-09-13 y 2026-09-14).
 - [x] Generado token de acceso personal en Zammad (`api-avs-zammad-claude`, permisos admin+ticket.agent) para dejar de usar la contraseña en llamadas API. Ver `15-MEMORIA-IA.md` 2026-09-20.
 - [x] **[2026-09-20] Limpieza de la nueva tanda de alertas NinjaOne duplicadas:** de 25 tickets abiertos con patrón `alerta ninjaone`, se cruzaron los 4 grupos (`AVSP165`, `AVSP97`, `TX2550M4` y el ticket suelto de fallo de parches) contra SentinelOne antes de decidir nada. Borrados 22 tickets confirmados `false_positive`/`resolved` en SentinelOne: `AVSP165` (2, caso `setup.exe` cerrado 16/09), `TX2550M4 / IDELAFUENTE` (16, `AVS_Toolbox.exe` sin firmar, mismo patrón recurrente de siempre), `TX2550M4 / MIGUEL` (2, `extendtext.exe`, fangame Pokémon) y `TX2550M4 / 5. AVS` (2, `EspacioGPT.exe`). Detalle e IDs en `15-MEMORIA-IA.md`.
 - [x] **`AVSP97 / wsun` resuelto [2026-09-20]:** la amenaza (`2570452559632847061`) era `AnyDesk.exe`; el usuario confirmó que sigue en uso legítimo en AVS. Creada exclusión por hash en SentinelOne y marcada `resolved`/`false_positive` (ver `SentinelOne/03-DECISIONES.md` 2026-09-20). Tickets `111324` y `111323` borrados.
-- [ ] Ticket `111328` ("FALLO en aprobación automática de parches") tampoco se ha tocado: no es ruido de alerta duplicada, es el aviso real del bug de `graph_config()` en el LXC de NinjaOne pendiente de desplegar (ver `NinjaOne/01-ESTADO.md`).
-- [ ] Corregir `Documentacion/Conexion/RCLONE.cmd`: referencia `id_rsa`, que no existe en este equipo (el acceso real usa `id_ed25519`).
-- [ ] Completar `04-INVENTARIO.md` con el resto de datos técnicos del LXC (recursos, versión de Zammad, etc.).
+- [x] Ticket `111328` sobre aprobación de parches: API consultada el 2026-10-08, estado `closed`. No se modificó el ticket; el estado técnico del parcheo sigue perteneciendo a NinjaOne.
+- [x] RCLONE corregido: rclone portable verificado, clave SFTP dedicada, claves públicas del servidor fijadas y comprobación real con `-CheckOnly`. No elimina configuraciones ni desmonta otras unidades.
+- [x] Inventario básico verificado: es VM QEMU 110, con Zammad en Docker; no un LXC.
+- [x] #111121: licencia saneada sin borrar ticket ni factura. Originales bajo cifrado local, fuera de Git; el índice ya no devuelve este ticket al buscar la clave.
+- [x] @autorizaciones: avisos de creación/seguimiento a Diego y Salva registrados para #111384 y #111389; SMTP activo/OK, sin errores ni trabajos pendientes al verificar. Sin enviar pruebas.
+- Herramienta opcional: instalar WinFsp con privilegios administrativos si se necesita montar Z:. El acceso SFTP está probado; el montaje no se ha realizado.

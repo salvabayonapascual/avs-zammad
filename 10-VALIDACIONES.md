@@ -22,3 +22,13 @@
 - Cambio local previo en scripts/zammad_api.py preservado y excluido de este guarda.
 
 **Siguiente accion:** comprobar la recepcion de un correo real con asunto @autorizaciones en dliosi@avsconsulting.es y sat@nexo.net. Diego atiende inicialmente; Salva interviene al recibir la reasignacion.
+
+## 2026-10-08 18:05 CEST — Reducción de avisos repetidos
+
+- **RCLONE:** ejecutado `powershell -NoProfile -ExecutionPolicy Bypass -File Documentacion/Conexion/montar-zammad.ps1 -CheckOnly`; salida 0, SFTP verificado con identidad dedicada y claves de host fijadas desde SSH autenticado. rclone v1.75.1 descargado de la fuente oficial, SHA256 del ZIP contrastado con SHA256SUMS. No se montó Z: porque WinFsp no está instalado; no se desmontaron unidades ni se reescribieron remotes.
+- **SyncBack #111121 (1123), artículo 4032:** simulación y aplicación de `scripts/sanear_licencia_syncback.py --apply`. Copia cifrada recuperable verificada antes del cambio; transacción de cuerpo y Store 10663/10664, sin borrados. Lectura posterior independiente: licencia ausente del cuerpo, HTML y partes MIME; búsqueda de la clave sin este ticket. IDs de adjuntos y hashes de imágenes/factura conservados, checksums de almacenamiento correctos. Ticket sigue cerrado.
+- **@autorizaciones:** consulta viva de grupo 6, usuarios 5/8, suscripciones e historial de #111384 (1386) y #111389 (1391). Ambos destinatarios constan en avisos de creación online/email: 2026-10-06 08:36:58/08:37:00 UTC y 2026-10-07 10:56:46/10:56:48 UTC. También consta seguimiento. Canal Email::Notification 1 activo, SMTP, status_out=ok, sin error; cola Delayed::Job vacía. Ejecuciones reales completadas sin avisos de error en las ventanas consultadas. No se cambió configuración ni se enviaron correos de prueba.
+- **Límite de evidencia:** comprobación de avisos en servidor, no acceso a los buzones finales de Diego/Salva. No se eleva como incidencia una recepción no confirmada sin indicios de fallo; si el usuario informa de ausencia, investigar entonces correo destino/spam.
+- Evidencia saneada: `Documentacion/Validaciones/2026-10-08-saneamiento.json`. Original cifrado local: referencia en `13-SEGURIDAD-Y-PRIVADO.md`; ninguna licencia/token/clave privada versionada.
+- Inventario básico contrastado con recursos Proxmox y `docker ps`; corregida la identificación LXC por VM.
+- #111328 (1330): búsqueda API en vivo confirma `closed`; retirada su marca de pendiente documental sin modificar el ticket ni afirmar resolución técnica en NinjaOne.

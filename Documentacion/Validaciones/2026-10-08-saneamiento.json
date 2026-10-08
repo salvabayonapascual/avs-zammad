@@ -1,0 +1,127 @@
+{
+  "verified_at": "2026-10-08T18:03:22",
+  "license_checks": {
+    "article_without_license": true,
+    "attachment_ids_preserved": true,
+    "10664_without_license": true,
+    "10665_without_license": true,
+    "10665_unchanged": true,
+    "10666_without_license": true,
+    "10666_unchanged": true,
+    "10667_without_license": true,
+    "10667_unchanged": true,
+    "10668_without_license": true,
+    "10668_unchanged": true,
+    "10669_without_license": true,
+    "10669_unchanged": true,
+    "mime_parts_without_license": true,
+    "no_ticket_in_search": true
+  },
+  "encrypted_backup": "Backups/20261008-175618-111121-original.json.enc",
+  "notifications": {
+    "channels": [
+      {
+        "id": 2,
+        "active": false,
+        "status_out": null,
+        "error_present": false,
+        "adapter": "sendmail"
+      },
+      {
+        "id": 1,
+        "active": true,
+        "status_out": "ok",
+        "error_present": false,
+        "adapter": "smtp"
+      }
+    ],
+    "history": [
+      [
+        1386,
+        "dliosi@avsconsulting.es(create:online,email)",
+        "2026-10-06T08:36:58.489Z"
+      ],
+      [
+        1386,
+        "sat@nexo.net(create:online,email)",
+        "2026-10-06T08:37:00.265Z"
+      ],
+      [
+        1386,
+        "sat@nexo.net(update:online,email)",
+        "2026-10-06T11:15:49.931Z"
+      ],
+      [
+        1386,
+        "dliosi@avsconsulting.es(update:online,email)",
+        "2026-10-06T11:18:24.351Z"
+      ],
+      [
+        1386,
+        "sat@nexo.net(update:online,email)",
+        "2026-10-06T11:18:26.194Z"
+      ],
+      [
+        1386,
+        "sat@nexo.net(update:online,email)",
+        "2026-10-06T11:19:42.220Z"
+      ],
+      [
+        1386,
+        "dliosi@avsconsulting.es(update:online,email)",
+        "2026-10-08T14:19:49.838Z"
+      ],
+      [
+        1391,
+        "dliosi@avsconsulting.es(create:online,email)",
+        "2026-10-07T10:56:46.310Z"
+      ],
+      [
+        1391,
+        "sat@nexo.net(create:online,email)",
+        "2026-10-07T10:56:48.294Z"
+      ],
+      [
+        1391,
+        "sat@nexo.net(update:online,email)",
+        "2026-10-07T12:27:05.206Z"
+      ],
+      [
+        1391,
+        "sat@nexo.net(update:online,email)",
+        "2026-10-07T12:27:49.565Z"
+      ],
+      [
+        1391,
+        "dliosi@avsconsulting.es(update:online,email)",
+        "2026-10-07T13:04:25.617Z"
+      ],
+      [
+        1391,
+        "sat@nexo.net(update:online,email)",
+        "2026-10-07T13:04:28.282Z"
+      ],
+      [
+        1391,
+        "sat@nexo.net(update:online,email)",
+        "2026-10-07T13:15:52.740Z"
+      ]
+    ],
+    "jobs": 0,
+    "stores": [
+      {
+        "id": 10663,
+        "checksum_ok": true,
+        "refs": 1
+      },
+      {
+        "id": 10664,
+        "checksum_ok": true,
+        "refs": 1
+      }
+    ]
+  },
+  "mailbox_receipt_verified": false,
+  "rclone_sftp_verified": true,
+  "winfsp_installed": false
+}

@@ -337,3 +337,10 @@
 **Tema:** Consulta sobre tickets de avisos Passbolt.
 **Ultimo contexto:** API en solo lectura: ticket #111386 (id 1388), aviso de activacion enviado por Passbolt_AVS <soporte@avsconsulting.es> a soporte@avsconsulting.es, recogido como email en @it. Consultados postmaster_filters: seis filtros activos por prefijo de asunto, ninguno excluye Passbolt. email_addresses confirma soporte activo en canal 4. No se modificaron filtros ni tickets.
 **Siguiente accion:** si el usuario solicita reducir el ruido, definir un filtro especifico para avisos informativos, preservando recuperaciones y alertas de seguridad.
+
+## 2026-10-08 18:05 CEST
+**Tipo:** Sesion
+**Tema:** Resolución del ruido documental de RCLONE, SyncBack y @autorizaciones.
+**Último contexto:** trabajo solicitado aplicado y comprobado: RCLONE apunta a rclone portable e identidad SFTP dedicada, con host fijado y prueba real correcta; #111121 saneado en cuerpo y copias HTML/MIME, manteniendo ticket/factura y originales cifrados recuperables; historial real de notificaciones a ambos usuarios y canal SMTP activo/OK verificados. Acceso administrativo recuperado mediante clave cifrada del propietario Proxmox, solo en memoria. Actualizado el resumen vivo para no repetir avisos antiguos. No se enviaron mensajes ni se cerraron tickets durante esta sesión. Validaciones y límites en 10-VALIDACIONES.
+**Archivos tocados:** 01-ESTADO, 04-INVENTARIO, 10-VALIDACIONES, 13-SEGURIDAD-Y-PRIVADO, esta memoria, lanzador y helper PowerShell de RCLONE, scripts de SSH/saneamiento y evidencia saneada.
+**Siguiente acción:** si se necesita montar Z:, instalar WinFsp con administrador; SFTP ya funciona. Investigar recepción final de avisos solo si se comunica un fallo. Consultar pendientes actuales por API, no por listados históricos. No repetir estos tres avisos como incidencias abiertas.
