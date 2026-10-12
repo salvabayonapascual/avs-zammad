@@ -11,3 +11,8 @@ Se eliminaron (borrado permanente, no cierre) los tickets #111253, #111251 y #11
 ## 2026-10-02 - Responsabilidad de @autorizaciones
 
 Peticion explicita del usuario sobre #111373: Diego Liosi es propietario por defecto; Diego y Salva reciben seguimiento. Salva no responde hasta que le traspasen el ticket mediante reasignacion. Es un criterio operativo, no un bloqueo tecnico de respuesta: ambos necesitan permisos para gestionar el traspaso. No reasignar automaticamente a Diego en cada respuesta.
+
+
+## GEN-017 — Calidad de arquitectura de contexto (2026-10-12 13:42)
+
+Aplicación local expresamente confirmada del [[Clientes/AVS/general/ESTANDAR-ARQUITECTURA-CONTEXTO|Estándar GEN-017]]: entrada breve, carga selectiva, continuidad acotada/archivo íntegro, autorizaciones con precedencia, fuentes canónicas y evaluación/cierre. Reglas operativas propias conservadas en [[Clientes/AVS/Valencia/Usuarios y equipos/Servidores/Cluster Proxmox/pve8.avs.local/VM/Zammad/02-METODO-TRABAJO|02-METODO-TRABAJO.md]]; no concede nuevas acciones sobre producción. GEN-017 prevalece sobre pautas locales antiguas de carga/archivo incompatibles. Validación documental en [[Clientes/AVS/Valencia/Usuarios y equipos/Servidores/Cluster Proxmox/pve8.avs.local/VM/Zammad/10-VALIDACIONES|10-VALIDACIONES.md]]; comportamiento real de agentes pendiente de observar.

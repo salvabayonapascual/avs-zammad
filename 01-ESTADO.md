@@ -38,3 +38,8 @@ Detalle completo en `15-MEMORIA-IA.md` (entradas 2026-09-13 y 2026-09-14).
 - [x] #111121: licencia saneada sin borrar ticket ni factura. Originales bajo cifrado local, fuera de Git; el índice ya no devuelve este ticket al buscar la clave.
 - [x] @autorizaciones: avisos de creación/seguimiento a Diego y Salva registrados para #111384 y #111389; SMTP activo/OK, sin errores ni trabajos pendientes al verificar. Sin enviar pruebas.
 - Herramienta opcional: instalar WinFsp con privilegios administrativos si se necesita montar Z:. El acceso SFTP está probado; el montaje no se ha realizado.
+
+
+## Revisión de arquitectura GEN-017 — 2026-10-12 13:42
+
+Confirmada adaptación documental al [[Clientes/AVS/general/ESTANDAR-ARQUITECTURA-CONTEXTO|Estándar GEN-017]]; controles y límites en [[Clientes/AVS/Valencia/Usuarios y equipos/Servidores/Cluster Proxmox/pve8.avs.local/VM/Zammad/10-VALIDACIONES|10-VALIDACIONES.md]]. No se revalidan hechos técnicos ni se cierran pendientes operativos por esta revisión. Las fechas de las comprobaciones originales y las prioridades se conservan.

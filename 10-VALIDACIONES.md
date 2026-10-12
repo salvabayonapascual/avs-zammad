@@ -32,3 +32,27 @@
 - Evidencia saneada: `Documentacion/Validaciones/2026-10-08-saneamiento.json`. Original cifrado local: referencia en `13-SEGURIDAD-Y-PRIVADO.md`; ninguna licencia/token/clave privada versionada.
 - Inventario básico contrastado con recursos Proxmox y `docker ps`; corregida la identificación LXC por VM.
 - #111328 (1330): búsqueda API en vivo confirma `closed`; retirada su marca de pendiente documental sin modificar el ticket ni afirmar resolución técnica en NinjaOne.
+
+
+## Evaluación de contexto GEN-017 — 2026-10-12 13:42
+
+**Tipo de evidencia:** revisión estática documental, no ejecución de agentes ni prueba de producción. Confirmación local del [[Clientes/AVS/general/ESTANDAR-ARQUITECTURA-CONTEXTO|Estándar GEN-017]]; futuras sesiones requieren observar el comportamiento.
+
+| Caso | Resultado exigido |
+|---|---|
+| Consulta técnica | Leer fuente propietaria actual, citar evidencia/fecha y distinguir documentación de consulta viva. |
+| Fuente inaccesible | Dato no disponible y motivo; no memoria, snapshot antiguo ni cero inventado. |
+| Cruce de dominios | Consultar propietarios y dependencias; evidencia íntegra solo en dueño del dato. |
+| Autorización/publicación | Alcance, consecuencias, respaldo/rollback y aprobación; excepciones solo bajo condiciones vigentes comprobadas. |
+| Ambigüedad | Detener la acción dudosa, no ampliar identidad, permisos ni alcance por semejanza. |
+| Gobierno | Doctrina GEN prevalente y confirmación local sin certificar otros propietarios. |
+| Memoria/navegación | Hasta cinco entradas/120 líneas objetivo, traslado íntegro, continuidad y destinos completos válidos. |
+| Cierre | Guarda propio, controles locales, evidencia, commit/push o falta de remoto/fallo explícitos. |
+
+Revisión: entrada breve y referencias locales; reglas específicas preservadas en método; decisiones operativas sin cambios de alcance; memoria dentro del presupuesto. Traslado de memoria comprobado byte a byte; SHA-256 7ee1e9e0ef58ddfaad9287d9fa992de71c670c75bd5bef2e3ee62f0fd6d2d327. Inventario y evidencias técnicas conservados. Los controles locales de navegación/texto/secretos se ejecutan antes del commit, y la publicación se contrasta después; informar fallos, no saltarlos.
+
+## Navegación de evaluación
+
+- [[Clientes/AVS/Valencia/Usuarios y equipos/Servidores/Cluster Proxmox/pve8.avs.local/VM/Zammad/00-INDICE|00-INDICE.md]]
+- [[Clientes/AVS/Valencia/Usuarios y equipos/Servidores/Cluster Proxmox/pve8.avs.local/VM/Zammad/02-METODO-TRABAJO|02-METODO-TRABAJO.md]]
+- [[Clientes/AVS/Valencia/Usuarios y equipos/Servidores/Cluster Proxmox/pve8.avs.local/VM/Zammad/03-DECISIONES|03-DECISIONES.md]]
