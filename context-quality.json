@@ -25,14 +25,16 @@
     "PROCEDIMIENTO-GUARDA.md",
     "AGENTS.md",
     "context-quality.json",
-    "EVALUACION-AGENTES.json"
+    "EVALUACION-AGENTES.json",
+    ".githooks/pre-commit"
   ],
   "instruction_files": [
     "AGENTS.md",
     "02-METODO-TRABAJO.md",
     "03-DECISIONES.md",
     "PROCEDIMIENTO-GUARDA.md",
-    "context-quality.json"
+    "context-quality.json",
+    ".githooks/pre-commit"
   ],
   "entry_targets": [
     "02-METODO-TRABAJO.md",
@@ -74,6 +76,17 @@
       "id": "ENTRY-09",
       "file": "AGENTS.md",
       "text": "- Antes de operar, leer [[Clientes/AVS/Valencia/Usuarios y equipos/Servidores/Cluster Proxmox/pve8.avs.local/VM/Zammad/02-METODO-TRABAJO|método y reglas locales]] y [[Clientes/AVS/Valencia/Usuarios y equipos/Servidores/Cluster Proxmox/pve8.avs.local/VM/Zammad/03-DECISIONES|decisiones vigentes]], y la skill/runbook específica. Conservar límites propios de seguridad, respaldo, ventana, identidad y host key."
+    },
+    {
+      "id": "ROUTING-GEN019",
+      "file": "AGENTS.md",
+      "text": "Un diagnóstico técnico combinado se documenta en los propietarios afectados. En mando solo se guardan doctrina, seguimiento de gobierno y referencias; pedir «guarda» no autoriza copiar allí ese diagnóstico, estado ni inventarios."
+    },
+    {
+      "id": "HOOK-GEN019",
+      "file": ".githooks/pre-commit",
+      "text": "--staged || exit 1"
     }
-  ]
+  ],
+  "policy_revision": "GEN-019.1"
 }

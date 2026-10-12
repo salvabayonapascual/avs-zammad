@@ -30,3 +30,6 @@ La estructura está preparada; el contexto se incorporará cuando corresponda.
 ## Proceso de calidad GEN-018
 
 - [[Clientes/AVS/Valencia/Usuarios y equipos/Servidores/Cluster Proxmox/pve8.avs.local/VM/Zammad/CALIDAD-CONTEXTO|CALIDAD-CONTEXTO.md]]; manifiesto `context-quality.json` y evaluaciones `EVALUACION-AGENTES.json` en raíz Git.
+
+
+GEN-019: [[Clientes/AVS/general/PROCESO-EVALUACION-AGENTES|proceso GEN-019]]. Version normativa compartida en `general/scripts/context-quality-policy.json`; manifestación local en `context-quality.json`.

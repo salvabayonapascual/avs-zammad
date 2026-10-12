@@ -20,3 +20,8 @@ Aplicación local expresamente confirmada del [[Clientes/AVS/general/ESTANDAR-AR
 ## GEN-018 — Proceso de calidad confirmado (2026-10-12 14:33)
 
 Aplicadas las cinco mejoras autorizadas: validación reproducible, evaluación con ocho casos/hash y mínimo dos sesiones del mismo agente/modelo, tandas piloto con checkpoints atómicos, conservación verificable de reglas locales y guarda sin cambios redundantes. Fuente [[Clientes/AVS/Valencia/Usuarios y equipos/Servidores/Cluster Proxmox/pve8.avs.local/VM/Zammad/CALIDAD-CONTEXTO|CALIDAD-CONTEXTO.md]]. Confirmación documental local; evaluación real de agentes sigue pendiente. No modifica hechos técnicos ni permisos del propietario.
+
+
+## GEN-019 — Integración y evaluación (2026-10-12 15:06)
+
+Confirmada aplicación local de hook sobre staging, evidencia estructurada/hash y revisión normativa GEN-019.1; fuente [[Clientes/AVS/general/PROCESO-EVALUACION-AGENTES|proceso GEN-019]]. Conservadas autorizaciones y reglas locales. La campaña aislada solo aplica a pilotos AVSP67/Passbolt/SentinelOne y mantiene el seguimiento observado pendiente. No se extrapolan resultados a este propietario sin pruebas.

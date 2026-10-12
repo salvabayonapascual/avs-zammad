@@ -58,3 +58,10 @@ Publicación: mostrar el texto completo y obtener aprobación antes de enviar re
 ## Proceso reproducible GEN-018
 
 Aplicar [[Clientes/AVS/Valencia/Usuarios y equipos/Servidores/Cluster Proxmox/pve8.avs.local/VM/Zammad/CALIDAD-CONTEXTO|CALIDAD-CONTEXTO.md]] y [[Clientes/AVS/general/PROCESO-CALIDAD-CONTEXTO|proceso común]] antes de cerrar cambios. Validación versionada, evaluación con cobertura/hash, reglas locales verificadas y tandas piloto reanudables. GEN-018 introduce cierre sin escrituras redundantes: sin cambios ni continuidad nuevos, comprobar sincronización y conservar memoria/testigo existentes. No amplía permisos operativos ni permite omitir controles en cambios reales. Las reglas específicas anteriores permanecen vigentes.
+
+
+## Integración y evidencias GEN-019
+
+Aplicar [[Clientes/AVS/general/PROCESO-EVALUACION-AGENTES|proceso GEN-019]]: hook obligatorio sobre el índice Git, evidencia JSON estructurada con hash y revisión, y versión normativa GEN-019.1 separada del mantenimiento del validador. No omitir controles locales. Campañas aisladas = simulación; no equivalen a cumplimiento observado en producción.
+
+Un diagnóstico técnico combinado se documenta en los propietarios afectados. En mando solo se guardan doctrina, seguimiento de gobierno y referencias; pedir «guarda» no autoriza copiar allí ese diagnóstico, estado ni inventarios.

@@ -1,5 +1,13 @@
 # Memoria reciente
 
+## 2026-10-12 15:06 — Integración GEN-019
+
+**Tipo:** Estructural / Decisión
+**Tema:** hook, evidencias y revisión normativa.
+**Último contexto:** integración documental autorizada; hook de calidad sobre staging y reglas GEN-019.1. Evidencias estructuradas; controles locales preservados.
+**Siguiente acción:** consultar [[Clientes/AVS/general/PROCESO-EVALUACION-AGENTES|proceso GEN-019]] y validaciones locales; recoger campañas aisladas sin cerrar seguimiento observado ni alterar permisos.
+
+
 ## 2026-10-12 14:33 — Proceso de calidad GEN-018
 
 **Tipo:** Estructural / Decisión

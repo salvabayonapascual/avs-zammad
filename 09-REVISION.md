@@ -8,3 +8,8 @@ Entrada y detalle separados; memoria acotada con continuidad y conservación; au
 ## 2026-10-12 14:33 — Proceso GEN-018
 
 Método y reglas locales conservados; calidad reproducible y evaluación explícita; excepción de guarda sin redundancias. Referencia [[Clientes/AVS/Valencia/Usuarios y equipos/Servidores/Cluster Proxmox/pve8.avs.local/VM/Zammad/CALIDAD-CONTEXTO|CALIDAD-CONTEXTO.md]].
+
+
+## 2026-10-12 15:06 — GEN-019
+
+Integración del hook, revisión normativa y evidencia JSON/hash. Preservadas reglas locales; seguir [[Clientes/AVS/general/PROCESO-EVALUACION-AGENTES|proceso GEN-019]].

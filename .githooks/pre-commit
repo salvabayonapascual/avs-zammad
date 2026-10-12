@@ -1,4 +1,17 @@
 #!/bin/sh
+
+# GEN-019: validar el indice antes de todos los controles locales existentes.
+if ! command -v python >/dev/null 2>&1; then
+  echo "GEN-019: falta Python; commit bloqueado." >&2
+  exit 1
+fi
+avs_context_root=$(git rev-parse --show-toplevel) || exit 1
+avs_context_validator="C:/Datos/Clientes/AVS/general/scripts/context_quality.py"
+if [ ! -f "$avs_context_validator" ]; then
+  echo "GEN-019: validador compartido no disponible; commit bloqueado." >&2
+  exit 1
+fi
+python "$avs_context_validator" --root "$avs_context_root" --staged || exit 1
 # GEN-010: caracteres de control y cambios de finales de linea (ver .githooks/check-texto.py)
 if command -v python >/dev/null 2>&1 && [ -f "$(git rev-parse --show-toplevel)/.githooks/check-texto.py" ]; then
   python "$(git rev-parse --show-toplevel)/.githooks/check-texto.py" || exit 1

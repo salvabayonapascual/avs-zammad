@@ -14,3 +14,8 @@ Este flujo se activa también al terminar cambios documentales autorizados, conf
 3. Validar el alcance de los cambios.
 4. Actualizar `15-MEMORIA-IA.md` al cerrar una sesión.
 5. Crear commits por unidad lógica y publicar solo cuando corresponda.
+
+
+## Control integrado GEN-019
+
+El hook valida el índice con `--staged` y conserva controles existentes. Seguir [[Clientes/AVS/general/PROCESO-EVALUACION-AGENTES|proceso GEN-019]]. No usar bypass de hooks para guardar un fallo; completar staging correcto y repetir. Guarda sin contexto nuevo mantiene la excepción GEN-018.

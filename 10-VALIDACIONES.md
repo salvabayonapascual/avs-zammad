@@ -60,3 +60,8 @@ Revisión: entrada breve y referencias locales; reglas específicas preservadas 
 ## 2026-10-12 14:33 — GEN-018
 
 Revisión estática: proceso, rutas, presupuestos y controles de reglas locales mediante manifiesto; validador y controles propios ejecutados antes del commit. Pruebas del validador en mando. Evaluación de agentes: pendiente, `EVALUACION-AGENTES.json` vacío; no simulación/observación realizada ni operaciones de producción. Publicación se confirma tras el guarda.
+
+
+## 2026-10-12 15:06 — Integración GEN-019
+
+Hook de calidad del índice instalado conservando controles previos. Revisión normativa GEN-019.1 y evidencias estructuradas/hash. Pruebas y revisión en mando; comprobaciones locales al guardar. Campañas y resultados se registran aparte; no se declara observación operativa por una prueba aislada.
