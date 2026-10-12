@@ -28,3 +28,6 @@ Si el árbol está limpio, no hay contexto nuevo y el cierre ya consta, verifica
 ## Integración obligatoria GEN-019
 
 [[Clientes/AVS/general/PROCESO-EVALUACION-AGENTES|proceso GEN-019]]. `pre-commit` ejecuta `--staged`; si falta la fuente o falla calidad, bloquea sin saltarse otros controles. Manifiesto declara `policy_revision=GEN-019.1`. Evidencias: entrada, actuación/resultado real, criterio, evaluación/revisor y SHA-256; no aceptar un archivo existente sin integridad/contenido. Comentarios/docstrings del validador no cambian cobertura; cambios de lógica requieren revisión de impacto y pruebas. Evaluación aislada marcada `simulation`; seguimiento observado sigue pendiente.
+
+
+GEN-020 obligatorio: [[Clientes/AVS/general/EVALUACION-ACCIONES-AGENTES|evaluación de acciones GEN-020]]. Acciones, variantes reservadas, revisión separada y carga selectiva; trazas locales en `Evaluaciones-GEN-020/`.

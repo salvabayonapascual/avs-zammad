@@ -86,6 +86,11 @@
       "id": "HOOK-GEN019",
       "file": ".githooks/pre-commit",
       "text": "--staged || exit 1"
+    },
+    {
+      "id": "ACTIONS-GEN020",
+      "file": "AGENTS.md",
+      "text": "GEN-020: evaluar acciones en fixtures, variantes reservadas, revisión separada y carga desde AGENTS; [[Clientes/AVS/general/EVALUACION-ACCIONES-AGENTES|evaluación de acciones GEN-020]]. No equiparar simulación a cumplimiento operativo observado."
     }
   ],
   "policy_revision": "GEN-019.1"

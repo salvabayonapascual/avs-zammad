@@ -13,3 +13,8 @@ Método y reglas locales conservados; calidad reproducible y evaluación explíc
 ## 2026-10-12 15:06 — GEN-019
 
 Integración del hook, revisión normativa y evidencia JSON/hash. Preservadas reglas locales; seguir [[Clientes/AVS/general/PROCESO-EVALUACION-AGENTES|proceso GEN-019]].
+
+
+## 2026-10-12 20:49 — GEN-020
+
+Integradas las cuatro mejoras de evaluación; reglas locales preservadas y seguimiento operativo pendiente.

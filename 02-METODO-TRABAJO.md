@@ -65,3 +65,8 @@ Aplicar [[Clientes/AVS/Valencia/Usuarios y equipos/Servidores/Cluster Proxmox/pv
 Aplicar [[Clientes/AVS/general/PROCESO-EVALUACION-AGENTES|proceso GEN-019]]: hook obligatorio sobre el índice Git, evidencia JSON estructurada con hash y revisión, y versión normativa GEN-019.1 separada del mantenimiento del validador. No omitir controles locales. Campañas aisladas = simulación; no equivalen a cumplimiento observado en producción.
 
 Un diagnóstico técnico combinado se documenta en los propietarios afectados. En mando solo se guardan doctrina, seguimiento de gobierno y referencias; pedir «guarda» no autoriza copiar allí ese diagnóstico, estado ni inventarios.
+
+
+## Evaluación de acciones GEN-020
+
+Aplicar [[Clientes/AVS/general/EVALUACION-ACCIONES-AGENTES|evaluación de acciones GEN-020]]: acciones auditadas en repos temporales y conectores simulados, variantes reservadas con rúbrica oculta, revisión en proceso distinto y navegación iniciada solo con AGENTS. Evidencias completas solo en este propietario; conservar errores e intentos inconclusos. Dos campañas distintas y hash vigente para cobertura repetida; mantener observación operativa pendiente. No cambiar permisos ni omitir controles propios.

@@ -40,3 +40,5 @@ Seguir [[Clientes/AVS/Valencia/Usuarios y equipos/Servidores/Cluster Proxmox/pve
 GEN-019: el hook comprueba staging; evidencias estructuradas y versión de reglas según [[Clientes/AVS/general/PROCESO-EVALUACION-AGENTES|proceso GEN-019]]. Mantener simulación y observación real diferenciadas.
 
 Un diagnóstico técnico combinado se documenta en los propietarios afectados. En mando solo se guardan doctrina, seguimiento de gobierno y referencias; pedir «guarda» no autoriza copiar allí ese diagnóstico, estado ni inventarios.
+
+GEN-020: evaluar acciones en fixtures, variantes reservadas, revisión separada y carga desde AGENTS; [[Clientes/AVS/general/EVALUACION-ACCIONES-AGENTES|evaluación de acciones GEN-020]]. No equiparar simulación a cumplimiento operativo observado.

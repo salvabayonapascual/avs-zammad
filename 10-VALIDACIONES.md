@@ -65,3 +65,8 @@ Revisión estática: proceso, rutas, presupuestos y controles de reglas locales 
 ## 2026-10-12 15:06 — Integración GEN-019
 
 Hook de calidad del índice instalado conservando controles previos. Revisión normativa GEN-019.1 y evidencias estructuradas/hash. Pruebas y revisión en mando; comprobaciones locales al guardar. Campañas y resultados se registran aparte; no se declara observación operativa por una prueba aislada.
+
+
+## 2026-10-12 20:49 — GEN-020
+
+Estándar de acciones/navegación confirmado; pruebas compartidas en mando. Campañas locales se registran aparte con fingerprint y revisión separados; no se declara cumplimiento observado. Evaluaciones textuales anteriores conservadas como históricas si cambia su hash.

@@ -25,3 +25,8 @@ Aplicadas las cinco mejoras autorizadas: validación reproducible, evaluación c
 ## GEN-019 — Integración y evaluación (2026-10-12 15:06)
 
 Confirmada aplicación local de hook sobre staging, evidencia estructurada/hash y revisión normativa GEN-019.1; fuente [[Clientes/AVS/general/PROCESO-EVALUACION-AGENTES|proceso GEN-019]]. Conservadas autorizaciones y reglas locales. La campaña aislada solo aplica a pilotos AVSP67/Passbolt/SentinelOne y mantiene el seguimiento observado pendiente. No se extrapolan resultados a este propietario sin pruebas.
+
+
+## GEN-020 — Acciones y navegación (2026-10-12 20:49)
+
+Confirmada aplicación local de las cuatro mejoras; fuente [[Clientes/AVS/general/EVALUACION-ACCIONES-AGENTES|evaluación de acciones GEN-020]]. Herramienta compartida `general/scripts/context_actions.py`, versión GEN-020.1. Campañas en propietarios; no extrapolar resultados. Se preservan reglas locales y distinción textual/acciones/observación. La integración del estándar no acredita campañas aprobadas.

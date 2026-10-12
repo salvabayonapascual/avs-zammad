@@ -33,3 +33,6 @@ La estructura está preparada; el contexto se incorporará cuando corresponda.
 
 
 GEN-019: [[Clientes/AVS/general/PROCESO-EVALUACION-AGENTES|proceso GEN-019]]. Version normativa compartida en `general/scripts/context-quality-policy.json`; manifestación local en `context-quality.json`.
+
+
+GEN-020 obligatorio: [[Clientes/AVS/general/EVALUACION-ACCIONES-AGENTES|evaluación de acciones GEN-020]]. Acciones, variantes reservadas, revisión separada y carga selectiva; trazas locales en `Evaluaciones-GEN-020/`.

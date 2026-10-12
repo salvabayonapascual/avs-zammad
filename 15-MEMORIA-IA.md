@@ -1,5 +1,13 @@
 # Memoria reciente
 
+## 2026-10-12 20:49 — Acciones y navegación GEN-020
+
+**Tipo:** Estructural / Decisión
+**Tema:** cuatro mejoras de evaluación.
+**Último contexto:** estándar de acciones temporales, casos reservados, revisión separada y carga selectiva aplicado; integración no equivale a campañas aprobadas.
+**Siguiente acción:** consultar [[Clientes/AVS/general/EVALUACION-ACCIONES-AGENTES|evaluación de acciones GEN-020]] y resultados propios; mantener pendientes de observación operativa y cobertura vigente.
+
+
 ## 2026-10-12 15:06 — Integración GEN-019
 
 **Tipo:** Estructural / Decisión
