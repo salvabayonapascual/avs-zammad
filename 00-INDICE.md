@@ -26,3 +26,7 @@ Leer AGENTS y cargar según [[Clientes/AVS/Valencia/Usuarios y equipos/Servidore
 | `Documentacion/` | Material operativo, organizado y enlazado desde las notas canónicas. |
 
 La estructura está preparada; el contexto se incorporará cuando corresponda.
+
+## Proceso de calidad GEN-018
+
+- [[Clientes/AVS/Valencia/Usuarios y equipos/Servidores/Cluster Proxmox/pve8.avs.local/VM/Zammad/CALIDAD-CONTEXTO|CALIDAD-CONTEXTO.md]]; manifiesto `context-quality.json` y evaluaciones `EVALUACION-AGENTES.json` en raíz Git.

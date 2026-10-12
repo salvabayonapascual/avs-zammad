@@ -16,3 +16,7 @@ Peticion explicita del usuario sobre #111373: Diego Liosi es propietario por def
 ## GEN-017 — Calidad de arquitectura de contexto (2026-10-12 13:42)
 
 Aplicación local expresamente confirmada del [[Clientes/AVS/general/ESTANDAR-ARQUITECTURA-CONTEXTO|Estándar GEN-017]]: entrada breve, carga selectiva, continuidad acotada/archivo íntegro, autorizaciones con precedencia, fuentes canónicas y evaluación/cierre. Reglas operativas propias conservadas en [[Clientes/AVS/Valencia/Usuarios y equipos/Servidores/Cluster Proxmox/pve8.avs.local/VM/Zammad/02-METODO-TRABAJO|02-METODO-TRABAJO.md]]; no concede nuevas acciones sobre producción. GEN-017 prevalece sobre pautas locales antiguas de carga/archivo incompatibles. Validación documental en [[Clientes/AVS/Valencia/Usuarios y equipos/Servidores/Cluster Proxmox/pve8.avs.local/VM/Zammad/10-VALIDACIONES|10-VALIDACIONES.md]]; comportamiento real de agentes pendiente de observar.
+
+## GEN-018 — Proceso de calidad confirmado (2026-10-12 14:33)
+
+Aplicadas las cinco mejoras autorizadas: validación reproducible, evaluación con ocho casos/hash y mínimo dos sesiones del mismo agente/modelo, tandas piloto con checkpoints atómicos, conservación verificable de reglas locales y guarda sin cambios redundantes. Fuente [[Clientes/AVS/Valencia/Usuarios y equipos/Servidores/Cluster Proxmox/pve8.avs.local/VM/Zammad/CALIDAD-CONTEXTO|CALIDAD-CONTEXTO.md]]. Confirmación documental local; evaluación real de agentes sigue pendiente. No modifica hechos técnicos ni permisos del propietario.

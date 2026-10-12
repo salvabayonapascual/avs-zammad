@@ -1,5 +1,13 @@
 # Memoria reciente
 
+## 2026-10-12 14:33 — Proceso de calidad GEN-018
+
+**Tipo:** Estructural / Decisión
+**Tema:** aplicación de las cinco mejoras del proceso.
+**Último contexto:** proceso/validador enlazados, reglas locales verificables y evaluación inicial vacía. Cambios documentales autorizados; no operaciones de producción.
+**Siguiente acción:** registrar observaciones por caso, agente/modelo, sesión y hash; seguir [[Clientes/AVS/Valencia/Usuarios y equipos/Servidores/Cluster Proxmox/pve8.avs.local/VM/Zammad/CALIDAD-CONTEXTO|CALIDAD-CONTEXTO.md]] y conservar pendientes de estado/decisiones en sus fuentes.
+
+
 ## 2026-10-12 13:42 — Alineación GEN-017
 
 **Tipo:** Estructural / Decisión

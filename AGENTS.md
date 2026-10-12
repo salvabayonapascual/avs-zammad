@@ -28,7 +28,11 @@ Entrada canónica de este propietario. Aplicar [[Clientes/AVS/general/ESTANDAR-A
 
 ## Cierre y navegación
 
-- Actualizar memoria con fecha/hora, Tipo, tema, último contexto y siguiente acción; hasta cinco entradas, objetivo 120 líneas. Archivar íntegro en histórico local y conservar referencias a pendientes.
+- Cuando haya trabajo o continuidad nuevos, actualizar memoria con fecha/hora, Tipo, tema, último contexto y siguiente acción; hasta cinco entradas, objetivo 120 líneas. Archivar íntegro en histórico local y conservar referencias a pendientes.
 - Registrar pruebas en validaciones y actualizar estado si cambia, manteniendo fechas de hechos técnicos. No confundir revisión documental con comprobación viva.
 - Ejecutar [[Clientes/AVS/Valencia/Usuarios y equipos/Servidores/Cluster Proxmox/pve8.avs.local/VM/Zammad/PROCEDIMIENTO-GUARDA|guarda local]] al terminar cambios: diff revisado, controles locales, testigo/trailer si se exige, commit/push con identidad/remoto propios. No force/reset/amend ni cambios ajenos; fallos explícitos.
 - Navegación interna con wikilinks completos desde C:/Datos; comprobar destinos y encabezados. Índice: [[Clientes/AVS/Valencia/Usuarios y equipos/Servidores/Cluster Proxmox/pve8.avs.local/VM/Zammad/00-INDICE|00-INDICE.md]]; método: [[Clientes/AVS/Valencia/Usuarios y equipos/Servidores/Cluster Proxmox/pve8.avs.local/VM/Zammad/02-METODO-TRABAJO|02-METODO-TRABAJO.md]]; evaluación: [[Clientes/AVS/Valencia/Usuarios y equipos/Servidores/Cluster Proxmox/pve8.avs.local/VM/Zammad/10-VALIDACIONES|10-VALIDACIONES.md]].
+
+## Calidad del proceso GEN-018
+
+Seguir [[Clientes/AVS/Valencia/Usuarios y equipos/Servidores/Cluster Proxmox/pve8.avs.local/VM/Zammad/CALIDAD-CONTEXTO|CALIDAD-CONTEXTO.md]]: validador versionado, controles locales, evaluación de agentes y cierre sin commits redundantes. Sin cambios ni continuidad nuevos, verificar sincronización; no editar memoria/testigo por un «guarda» repetido.

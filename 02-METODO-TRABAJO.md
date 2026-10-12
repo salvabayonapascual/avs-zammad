@@ -54,3 +54,7 @@ Cargar la sección pertinente antes de operar; las decisiones actuales prevalece
 [[Clientes/AVS/Valencia/Usuarios y equipos/Servidores/Cluster Proxmox/pve8.avs.local/VM/Zammad/00-INDICE|Índice]] · [[Clientes/AVS/Valencia/Usuarios y equipos/Servidores/Cluster Proxmox/pve8.avs.local/VM/Zammad/01-ESTADO|Estado]] · [[Clientes/AVS/Valencia/Usuarios y equipos/Servidores/Cluster Proxmox/pve8.avs.local/VM/Zammad/PROCEDIMIENTO-GUARDA|Guarda]]
 
 Publicación: mostrar el texto completo y obtener aprobación antes de enviar respuestas o correos. La excepción de cierre de triage interno sin firma procede solo de la autorización vigente en SentinelOne y mando, con asociación del threat/ticket comprobada. Respetar además el criterio vigente de @autorizaciones sobre titularidad y reasignación; no enviar por una mera consulta.
+
+## Proceso reproducible GEN-018
+
+Aplicar [[Clientes/AVS/Valencia/Usuarios y equipos/Servidores/Cluster Proxmox/pve8.avs.local/VM/Zammad/CALIDAD-CONTEXTO|CALIDAD-CONTEXTO.md]] y [[Clientes/AVS/general/PROCESO-CALIDAD-CONTEXTO|proceso común]] antes de cerrar cambios. Validación versionada, evaluación con cobertura/hash, reglas locales verificadas y tandas piloto reanudables. GEN-018 introduce cierre sin escrituras redundantes: sin cambios ni continuidad nuevos, comprobar sincronización y conservar memoria/testigo existentes. No amplía permisos operativos ni permite omitir controles en cambios reales. Las reglas específicas anteriores permanecen vigentes.

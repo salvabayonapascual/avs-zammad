@@ -1,0 +1,79 @@
+{
+  "schema": 1,
+  "standard": "GEN-018",
+  "cases": [
+    "Q-01",
+    "Q-02",
+    "Q-03",
+    "Q-04",
+    "Q-05",
+    "Q-06",
+    "Q-07",
+    "Q-08"
+  ],
+  "required_files": [
+    "00-INDICE.md",
+    "01-ESTADO.md",
+    "02-METODO-TRABAJO.md",
+    "03-DECISIONES.md",
+    "04-INVENTARIO.md",
+    "05-RUNBOOKS.md",
+    "08-HISTORICO.md",
+    "10-VALIDACIONES.md",
+    "15-MEMORIA-IA.md",
+    "CALIDAD-CONTEXTO.md",
+    "PROCEDIMIENTO-GUARDA.md",
+    "AGENTS.md",
+    "context-quality.json",
+    "EVALUACION-AGENTES.json"
+  ],
+  "instruction_files": [
+    "AGENTS.md",
+    "02-METODO-TRABAJO.md",
+    "03-DECISIONES.md",
+    "PROCEDIMIENTO-GUARDA.md",
+    "context-quality.json"
+  ],
+  "entry_targets": [
+    "02-METODO-TRABAJO.md",
+    "03-DECISIONES.md",
+    "PROCEDIMIENTO-GUARDA.md"
+  ],
+  "memory_file": "15-MEMORIA-IA.md",
+  "method_file": "02-METODO-TRABAJO.md",
+  "decisions_file": "03-DECISIONES.md",
+  "link_files": [
+    "AGENTS.md",
+    "CALIDAD-CONTEXTO.md"
+  ],
+  "evaluation_file": "EVALUACION-AGENTES.json",
+  "controls": [
+    {
+      "id": "LOCAL-01",
+      "file": "02-METODO-TRABAJO.md",
+      "section": "Calidad de contexto GEN-017",
+      "sha256": "297875ba6ad6f9fdfd6da6278ac10ab8e14036e19c71b8dcdb7bd87c7befb7ab"
+    },
+    {
+      "id": "LOCAL-02",
+      "file": "02-METODO-TRABAJO.md",
+      "section": "Reglas locales conservadas desde la entrada",
+      "sha256": "cd7c92c0b8341e6c1d19291ad927b245ca28af1a64f692b1a51dc17849978465"
+    },
+    {
+      "id": "ENTRY-07",
+      "file": "AGENTS.md",
+      "text": "- Secretos sueltos solo cifrados y fuera de respuestas/logs; controles GEN-003/010. Excepciones expresas de backups según doctrina, nunca inferidas por ser un remoto privado."
+    },
+    {
+      "id": "ENTRY-08",
+      "file": "AGENTS.md",
+      "text": "- Una consulta no autoriza cambios, reinicios, borrados ni publicaciones. Respetar autorización concreta y excepciones permanentes verificadas del propietario; no ampliarlas. Ante ambigüedad, no ejecutar la acción dependiente."
+    },
+    {
+      "id": "ENTRY-09",
+      "file": "AGENTS.md",
+      "text": "- Antes de operar, leer [[Clientes/AVS/Valencia/Usuarios y equipos/Servidores/Cluster Proxmox/pve8.avs.local/VM/Zammad/02-METODO-TRABAJO|método y reglas locales]] y [[Clientes/AVS/Valencia/Usuarios y equipos/Servidores/Cluster Proxmox/pve8.avs.local/VM/Zammad/03-DECISIONES|decisiones vigentes]], y la skill/runbook específica. Conservar límites propios de seguridad, respaldo, ventana, identidad y host key."
+    }
+  ]
+}

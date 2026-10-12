@@ -56,3 +56,7 @@ Revisión: entrada breve y referencias locales; reglas específicas preservadas 
 - [[Clientes/AVS/Valencia/Usuarios y equipos/Servidores/Cluster Proxmox/pve8.avs.local/VM/Zammad/00-INDICE|00-INDICE.md]]
 - [[Clientes/AVS/Valencia/Usuarios y equipos/Servidores/Cluster Proxmox/pve8.avs.local/VM/Zammad/02-METODO-TRABAJO|02-METODO-TRABAJO.md]]
 - [[Clientes/AVS/Valencia/Usuarios y equipos/Servidores/Cluster Proxmox/pve8.avs.local/VM/Zammad/03-DECISIONES|03-DECISIONES.md]]
+
+## 2026-10-12 14:33 — GEN-018
+
+Revisión estática: proceso, rutas, presupuestos y controles de reglas locales mediante manifiesto; validador y controles propios ejecutados antes del commit. Pruebas del validador en mando. Evaluación de agentes: pendiente, `EVALUACION-AGENTES.json` vacío; no simulación/observación realizada ni operaciones de producción. Publicación se confirma tras el guarda.

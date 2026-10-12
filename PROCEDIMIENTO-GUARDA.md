@@ -1,5 +1,9 @@
 # Procedimiento `guarda`
 
+## Precedencia de cierre GEN-018
+
+Aplicar [[Clientes/AVS/Valencia/Usuarios y equipos/Servidores/Cluster Proxmox/pve8.avs.local/VM/Zammad/CALIDAD-CONTEXTO|CALIDAD-CONTEXTO.md]]. Antes de editar memoria/testigo comprobar si hay cambios o continuidad nuevos. Si no los hay y el cierre ya consta, verificar HEAD/remoto y comunicar hash existente; no crear otro commit. Si hay cambios, aplicar validador común y todos los controles/guarda propios. Esta excepción prevalece sobre pasos anteriores de actualización incondicional; conserva autorizaciones y seguridad.
+
 ## Calidad de cierre GEN-017
 
 Este flujo se activa también al terminar cambios documentales autorizados, conforme al guarda automático de mando. Aplicar memoria breve/conservación y evaluación de [[Clientes/AVS/Valencia/Usuarios y equipos/Servidores/Cluster Proxmox/pve8.avs.local/VM/Zammad/02-METODO-TRABAJO|02-METODO-TRABAJO.md]]. Preservar la identidad, rama y origin actuales; publicar solo el alcance revisado, sin force/reset/amend. Si no existe remoto, guardar commit local y comunicar que no está publicado, sin crear un remoto por inferencia.
