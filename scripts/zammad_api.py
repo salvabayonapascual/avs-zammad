@@ -9,6 +9,7 @@ Uso desde linea de comandos:
     python scripts/zammad_api.py get <id>
     python scripts/zammad_api.py show <numero|id> [--max-chars N]
     python scripts/zammad_api.py email <numero|id> (--file F | --stdin) [--to X] [--dry-run]
+    python scripts/zammad_api.py crear --to X --titulo T [--group G] [--categoria C] (--file F | --stdin) [--dry-run]
     python scripts/zammad_api.py reply <id> <body> [--internal]
     python scripts/zammad_api.py close <id> [--body <body>] [--internal]
     python scripts/zammad_api.py delete <id> [<id> ...]
@@ -336,6 +337,37 @@ def send_email_reply(token, ref, text, to=None, dry_run=False):
     return ultimo
 
 
+def create_email_ticket(token, to, title, text, group="@it", categoria=None, dry_run=False):
+    """Crea un ticket nuevo y envia su primer mensaje POR CORREO al destinatario (2026-10-15).
+
+    Mismo formato que send_email_reply (texto plano, parrafos separados por linea en blanco).
+    El destinatario queda como cliente del ticket ('guess:' crea o reutiliza el usuario).
+    Solo con texto aprobado por el usuario; --dry-run muestra lo que se enviaria.
+    """
+    import html as _html
+    if not to or "@" not in to:
+        raise SystemExit(f"Destinatario no valido: {to!r}")
+    parrafos = [p.strip() for p in text.replace("\r\n", "\n").split("\n\n") if p.strip()]
+    cuerpo = "".join("<p>" + _html.escape(p).replace("\n", "<br>") + "</p>" for p in parrafos)
+    if dry_run:
+        print(f"[PRUEBA, no se envia] nuevo ticket -> {to} | grupo {group} | categoria {categoria} | asunto: {title}")
+        print("\n\n".join(parrafos))
+        return None
+    body = {"title": title, "group": group, "customer_id": f"guess:{to}",
+            "article": {"subject": title, "body": cuerpo, "content_type": "text/html", "type": "email",
+                        "sender": "Agent", "to": to, "internal": False}}
+    if categoria:
+        body["categoria"] = categoria
+    status, data = _request("POST", "/tickets", token, body=body)
+    if status not in (200, 201):
+        raise RuntimeError(f"Error {status}: {data}")
+    status, arts = _request("GET", f"/ticket_articles/by_ticket/{data['id']}", token)
+    primero = arts[0] if status == 200 and arts else {}
+    if primero.get("type") != "email" or primero.get("internal"):
+        raise RuntimeError(f"Ticket #{data.get('number')} creado pero el mensaje no quedo como correo visible; revisar en la web")
+    return data
+
+
 def main():
     # La consola de Windows usa cp1252: sin esto, un acento o emoji en un ticket rompe la salida
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
@@ -392,6 +424,22 @@ def main():
         art = send_email_reply(token, a.ref, text, a.to, a.dry_run)
         if art:
             print(f"Enviado: {art.get('created_at', '')[:16]} | {art.get('type')} | para: {art.get('to')} | interno: {art.get('internal')}")
+    elif cmd == "crear":
+        import argparse
+        p = argparse.ArgumentParser(prog="zammad_api.py crear")
+        p.add_argument("--to", required=True, help="Correo del destinatario (queda como cliente)")
+        p.add_argument("--titulo", required=True)
+        p.add_argument("--group", default="@it")
+        p.add_argument("--categoria")
+        g = p.add_mutually_exclusive_group(required=True)
+        g.add_argument("--file", help="Fichero UTF-8 con el texto aprobado por el usuario")
+        g.add_argument("--stdin", action="store_true")
+        p.add_argument("--dry-run", action="store_true", help="Muestra lo que se enviaria, sin enviar")
+        a = p.parse_args(sys.argv[2:])
+        text = open(a.file, encoding="utf-8").read() if a.file else sys.stdin.read()
+        tk = create_email_ticket(token, a.to, a.titulo, text, a.group, a.categoria, a.dry_run)
+        if tk:
+            print(f"Creado y enviado: #{tk.get('number')} (id {tk.get('id')}) | para: {a.to} | grupo {a.group}")
     elif cmd == "reply":
         ticket_id = sys.argv[2]
         internal = "--internal" in sys.argv[3:]
