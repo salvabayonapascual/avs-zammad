@@ -337,25 +337,45 @@ def send_email_reply(token, ref, text, to=None, dry_run=False):
     return ultimo
 
 
+MARCA_SIN_COMPROBAR = "‹"
+
+
+def resolve_user(token, ref):
+    """Usuario EXISTENTE de Zammad por login, correo o nombre. Exactamente uno o se detiene:
+    nunca crear un cliente por un error de tecleo («sdenosw»)."""
+    status, users = _request("GET", "/users/search", token, params={"query": ref, "limit": 10})
+    users = [u for u in (users or []) if isinstance(u, dict) and u.get("email") and u.get("active", True)]
+    exactos = [u for u in users if ref.lower() in (str(u.get("login", "")).lower(), str(u.get("email", "")).lower())]
+    candidatos = exactos or users
+    if len(candidatos) != 1:
+        lista = ", ".join(f"{u.get('firstname')} {u.get('lastname')} <{u.get('email')}>" for u in candidatos) or "ninguno"
+        raise SystemExit(f"Destinatario {ref!r} no identifica a un unico usuario de Zammad ({lista}); no se envia")
+    return candidatos[0]
+
+
 def create_email_ticket(token, to, title, text, group="@it", categoria=None, dry_run=False):
     """Crea un ticket nuevo y envia su primer mensaje POR CORREO al destinatario (2026-10-15).
 
     Mismo formato que send_email_reply (texto plano, parrafos separados por linea en blanco).
-    El destinatario queda como cliente del ticket ('guess:' crea o reutiliza el usuario).
-    Solo con texto aprobado por el usuario; --dry-run muestra lo que se enviaria.
+    `to` es login, correo o nombre de un usuario EXISTENTE (no se crean clientes). Se detiene si
+    el texto conserva marcas ‹...› de datos sin comprobar. Solo con texto aprobado por el usuario;
+    --dry-run muestra destinatario real (nombre y correo) y texto, sin enviar.
     """
     import html as _html
-    if not to or "@" not in to:
-        raise SystemExit(f"Destinatario no valido: {to!r}")
+    if MARCA_SIN_COMPROBAR in text:
+        raise SystemExit("El texto conserva marcas ‹...› de datos sin comprobar: completar o quitar antes de enviar")
+    usuario = resolve_user(token, to)
+    correo = usuario["email"]
     parrafos = [p.strip() for p in text.replace("\r\n", "\n").split("\n\n") if p.strip()]
     cuerpo = "".join("<p>" + _html.escape(p).replace("\n", "<br>") + "</p>" for p in parrafos)
     if dry_run:
-        print(f"[PRUEBA, no se envia] nuevo ticket -> {to} | grupo {group} | categoria {categoria} | asunto: {title}")
+        print(f"[PRUEBA, no se envia] nuevo ticket -> {usuario.get('firstname')} {usuario.get('lastname')} <{correo}> "
+              f"| grupo {group} | categoria {categoria} | asunto: {title}")
         print("\n\n".join(parrafos))
         return None
-    body = {"title": title, "group": group, "customer_id": f"guess:{to}",
+    body = {"title": title, "group": group, "customer_id": usuario["id"],
             "article": {"subject": title, "body": cuerpo, "content_type": "text/html", "type": "email",
-                        "sender": "Agent", "to": to, "internal": False}}
+                        "sender": "Agent", "to": correo, "internal": False}}
     if categoria:
         body["categoria"] = categoria
     status, data = _request("POST", "/tickets", token, body=body)
@@ -427,7 +447,7 @@ def main():
     elif cmd == "crear":
         import argparse
         p = argparse.ArgumentParser(prog="zammad_api.py crear")
-        p.add_argument("--to", required=True, help="Correo del destinatario (queda como cliente)")
+        p.add_argument("--to", required=True, help="Login, correo o nombre de un usuario existente de Zammad")
         p.add_argument("--titulo", required=True)
         p.add_argument("--group", default="@it")
         p.add_argument("--categoria")
