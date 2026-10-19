@@ -1,4 +1,4 @@
-﻿---
+--
 name: zammad-responder-cerrar-ticket
 description: "Use when the user asks to read, answer, update or close a Zammad ticket. Read it with `show` (accepts the visible number), draft the reply, SHOW THE EXACT TEXT AND WAIT FOR APPROVAL, send it by email with `email` (not `reply`, which only creates a note), verify, and optionally close only that ticket."
 ---
@@ -15,7 +15,7 @@ description: "Use when the user asks to read, answer, update or close a Zammad t
    ```
    Muestra título, estado, grupo, cliente y la conversación limpia (sin el acuse automático).
 2. **Redactar** el borrador en el tono del usuario: breve, cercano, en castellano, saludo con el nombre ("Hola Sergio:"), cierre corto ("Gracias.", "Un abrazo."). Sin firma: Zammad añade la del agente. No inventar datos ni compromisos que el usuario no haya dicho; si se añade algo propio (p. ej. el correo de otra persona sacado de otro ticket), decirlo al presentar el borrador.
-**Regla para compras:** cuando una solicitud de compra sea para Silvia Densow, el destinatario debe ser siempre `sdensow@avsconsulting.es`, aunque el ticket original pertenezca al usuario que necesita el material. Mantener el ticket original como referencia y usar `--to sdensow@avsconsulting.es` en `email`.\n\n3. **Mostrar y esperar aprobación.** Presentar en el chat: destinatario (correo), número y título del ticket, y el **texto exacto** tal cual se enviará. Preguntar también si después se deja abierto o se cierra. No enviar nada sin un "sí"/"envíalo" explícito; si el usuario corrige el texto, volver a mostrar la versión final antes de enviarla.
+**Regla para compras:** cuando una solicitud de compra sea para Silvia Densow, el destinatario debe ser siempre `sdensow@avsconsulting.es`, aunque el ticket original pertenezca al usuario que necesita el material. Mantener el ticket original como referencia y usar `--to sdensow@avsconsulting.es` en `email`.`n`n3. **Mostrar y esperar aprobación.** Presentar en el chat: destinatario (correo), número y título del ticket, y el **texto exacto** tal cual se enviará. Preguntar también si después se deja abierto o se cierra. No enviar nada sin un "sí"/"envíalo" explícito; si el usuario corrige el texto, volver a mostrar la versión final antes de enviarla.
 4. **Comprobar en seco** con el texto aprobado guardado en un fichero UTF-8 (así no se rompen acentos ni comillas):
    ```
    python scripts/zammad_api.py email <numero> --file <borrador.txt> --dry-run
