@@ -30,3 +30,7 @@ Confirmada aplicación local de hook sobre staging, evidencia estructurada/hash 
 ## GEN-020 — Acciones y navegación (2026-10-12 20:49)
 
 Confirmada aplicación local de las cuatro mejoras; fuente [[Clientes/AVS/general/EVALUACION-ACCIONES-AGENTES|evaluación de acciones GEN-020]]. Herramienta compartida `general/scripts/context_actions.py`, versión GEN-020.1. Campañas en propietarios; no extrapolar resultados. Se preservan reglas locales y distinción textual/acciones/observación. La integración del estándar no acredita campañas aprobadas.
+
+## GEN-022 — Ahorro de contexto (2026-10-22)
+
+Confirmación documental local autorizada por el usuario: [[Clientes/AVS/general/AHORRO-CONTEXTO|reglas canónicas GEN-022]] en la entrada y el método cuando existe. Lectura por intención/sección, referencias sin duplicaciones, resúmenes con errores y antigüedad, y medición comparable. No reduce autorizaciones, controles o consultas actuales. Cumplimiento observado y tokens reales pendientes de evaluar.

@@ -70,3 +70,7 @@ Hook de calidad del índice instalado conservando controles previos. Revisión n
 ## 2026-10-12 20:49 — GEN-020
 
 Estándar de acciones/navegación confirmado; pruebas compartidas en mando. Campañas locales se registran aparte con fingerprint y revisión separados; no se declara cumplimiento observado. Evaluaciones textuales anteriores conservadas como históricas si cambia su hash.
+
+## 2026-10-22 — Revisión estática GEN-022
+
+Entrada enlazada a la fuente canónica; lectura por intención y bloque. Texto original de las reglas locales conservado; sin cambios técnicos ni pruebas de producción. Volumen de AGENTS antes: 5167 caracteres; después: 5423. Este coste de entrada no mide ahorro de tokens ni conducta observada. Evaluación de agentes pendiente para el nuevo contexto.

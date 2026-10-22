@@ -70,3 +70,7 @@ Un diagnóstico técnico combinado se documenta en los propietarios afectados. E
 ## Evaluación de acciones GEN-020
 
 Aplicar [[Clientes/AVS/general/EVALUACION-ACCIONES-AGENTES|evaluación de acciones GEN-020]]: acciones auditadas en repos temporales y conectores simulados, variantes reservadas con rúbrica oculta, revisión en proceso distinto y navegación iniciada solo con AGENTS. Evidencias completas solo en este propietario; conservar errores e intentos inconclusos. Dos campañas distintas y hash vigente para cobertura repetida; mantener observación operativa pendiente. No cambiar permisos ni omitir controles propios.
+
+## Ahorro de contexto GEN-022
+
+Aplicar la fuente canónica [[Clientes/AVS/general/AHORRO-CONTEXTO|GEN-022]]. Su carga por intención prevalece sobre instrucciones generales de lectura inicial; las autorizaciones, fuentes actuales y el guarda local se mantienen. No copiar aquí reglas o herramientas compartidas.

@@ -1,5 +1,12 @@
 # Memoria reciente
 
+## 2026-10-22 21:37 — Aplicación documental GEN-022
+
+**Tipo:** Estructural
+**Tema:** Ahorro de contexto por intención, sección, bloque y referencia canónica.
+**Último contexto:** Reglas locales conservadas; revisión documental sin operaciones de producción. Tokens reales y conducta de agentes no evaluados.
+**Siguiente acción:** Observar lecturas y relecturas en próximas tareas; conservar la continuidad previa del propietario.
+
 ## 2026-10-12 20:49 — Acciones y navegación GEN-020
 
 **Tipo:** Estructural / Decisión

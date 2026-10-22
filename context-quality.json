@@ -91,6 +91,11 @@
       "id": "ACTIONS-GEN020",
       "file": "AGENTS.md",
       "text": "GEN-020: evaluar acciones en fixtures, variantes reservadas, revisión separada y carga desde AGENTS; [[Clientes/AVS/general/EVALUACION-ACCIONES-AGENTES|evaluación de acciones GEN-020]]. No equiparar simulación a cumplimiento operativo observado."
+    },
+    {
+      "id": "ENTRY-GEN022",
+      "file": "AGENTS.md",
+      "text": "GEN-022: aplicar [[Clientes/AVS/general/AHORRO-CONTEXTO|ahorro de contexto]]; «lee contexto» carga solo entrada, preferencias y memoria. Esta regla prevalece sobre cargas generales de arranque; conserva sincronización, autorizaciones y controles locales."
     }
   ],
   "policy_revision": "GEN-019.1"

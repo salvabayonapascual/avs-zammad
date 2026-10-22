@@ -12,6 +12,8 @@ Entrada canónica de este propietario. Aplicar [[Clientes/AVS/general/ESTANDAR-A
 
 ## Inicio y carga selectiva
 
+GEN-022: aplicar [[Clientes/AVS/general/AHORRO-CONTEXTO|ahorro de contexto]]; «lee contexto» carga solo entrada, preferencias y memoria. Esta regla prevalece sobre cargas generales de arranque; conserva sincronización, autorizaciones y controles locales.
+
 1. Fetch/status; si origin existe y está limpio y solo detrás, pull --ff-only. Preservar cambios ajenos y detener divergencias; sin remoto, no simular sincronización.
 2. Leer [[Clientes/AVS/Valencia/Usuarios y equipos/Servidores/Cluster Proxmox/pve8.avs.local/VM/Zammad/01-ESTADO|01-ESTADO.md]] y [[Clientes/AVS/Valencia/Usuarios y equipos/Servidores/Cluster Proxmox/pve8.avs.local/VM/Zammad/07b-PREFERENCIAS-IA|preferencias]]; [[Clientes/AVS/Valencia/Usuarios y equipos/Servidores/Cluster Proxmox/pve8.avs.local/VM/Zammad/15-MEMORIA-IA|15-MEMORIA-IA.md]] al retomar o si falta contexto reciente.
 3. Cargar solo las fuentes de la intención según el router. No leer histórico completo ni activar tareas operativas por abrir el repo.
