@@ -1,5 +1,9 @@
 # Validaciones reales
 
+## 2026-11-12 — Alta de grupo propio para Iván de la Fuente
+
+Comprobación previa: el usuario `idelafuente@avsconsulting.es` ya existía como cuenta activa de cliente, sin grupos. Se creó el grupo independiente `@Ivan de la Fuente` (id 7), se añadió el rol de agente conservando el de cliente y se asignó acceso `full` únicamente a ese grupo. Validación posterior por API: grupo activo con `user_ids: [147]` y usuario activo con `role_ids: [3, 2]`, `group_ids: {"7": ["full"]}`. No se concedió acceso a `@it` ni a otros grupos.
+
 | Fecha | Prueba | Estado | Evidencia | Siguiente paso |
 |---|---|---|---|---|
 | 2026-09-22 | Eliminación de `AVS_Toolbox.exe` y cierre del ticket #111334 | Aplicado | Verificado por SSH en TX2550M4: el archivo no estaba firmado y fue eliminado; `Test-Path` devolvió `False`. Ticket Zammad ID interno `1336`: anotación interna añadida y estado final `closed`; categoría sin categoría. La instancia mantuvo `priority_id=2` porque no ofrece prioridad baja configurable. | Aplicar en futuras alertas de AVS_Toolbox sin firmar: eliminar tras confirmación, anotar y preguntar antes del cierre por respuesta, prioridad, criticidad y categoría. |
