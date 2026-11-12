@@ -1,5 +1,9 @@
 # Validaciones reales
 
+## 2026-11-12 — Mejora del procedimiento de altas Zammad
+
+Creada la skill `.skills/zammad-alta-usuario-grupo/SKILL.md` con detección de duplicados, separación explícita de rol/grupo/alcance, permisos mínimos, validación independiente por API y cierre documental. El manual de Iván mantiene una fuente Markdown y un PDF generado; las capturas están embebidas en el PDF. La incorporación de los PNG al repositorio queda pendiente porque las rutas de los adjuntos no están disponibles como archivos locales en esta sesión.
+
 ## 2026-11-12 — Alta de grupo propio para Iván de la Fuente
 
 Comprobación previa: el usuario `idelafuente@avsconsulting.es` ya existía como cuenta activa de cliente, sin grupos. Se creó el grupo independiente `@Ivan de la Fuente` (id 7), se añadió el rol de agente conservando el de cliente y se asignó acceso `full` únicamente a ese grupo. Validación posterior por API: grupo activo con `user_ids: [147]` y usuario activo con `role_ids: [3, 2]`, `group_ids: {"7": ["full"]}`. No se concedió acceso a `@it` ni a otros grupos.

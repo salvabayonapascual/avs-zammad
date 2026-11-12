@@ -12,11 +12,13 @@
 2. Introducir `idelafuente@avsconsulting.es`.
 3. Introducir la contraseña y pulsar **Iniciar sesión**.
 
+
 ## Si no se dispone de contraseña
 
 1. En la pantalla de acceso, pulsar **¿Olvidaste la contraseña?**
 2. Introducir `idelafuente@avsconsulting.es`.
 3. Pulsar **Enviar**.
+
 4. Abrir el correo recibido y establecer la contraseña.
 5. Volver a entrar en Zammad.
 
