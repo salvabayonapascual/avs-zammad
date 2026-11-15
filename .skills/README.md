@@ -10,3 +10,4 @@ Añadir aquí únicamente skills específicos cuando exista un proceso repetible
 | `registrar-compra/` | Preparar y enviar solicitudes de compra a Silvia Densow desde el ticket de Zammad, con aprobación previa y verificación del correo visible. |
 | `ninjaone-alertas-duplicadas/` | Limpiar alertas repetidas de NinjaOne para un mismo equipo. |
 | `zammad-buscar-texto/` | Buscar una cadena en titulo y cuerpo de los tickets, con filtros y contexto. |
+| `zammad-purge-alertas/` | Borrado masivo de tickets por patron en el cuerpo (alertas repetitivas). |

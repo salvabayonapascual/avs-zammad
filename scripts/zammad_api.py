@@ -13,9 +13,16 @@ Uso desde linea de comandos:
     python scripts/zammad_api.py reply <id> <body> [--internal]
     python scripts/zammad_api.py close <id> [--body <body>] [--internal]
     python scripts/zammad_api.py delete <id> [<id> ...]
+    python scripts/zammad_api.py purge <query_indexada> --body-contains <texto_literal>
+        [--state S] [--group G] [--since YYYY-MM-DD] [--until YYYY-MM-DD]
+        [--limit N] [--dry-run]
 
 `search` solo mira el titulo; `find` busca tambien en el cuerpo de los
-articulos (ver .skills/zammad-buscar-texto/SKILL.md).
+articulos (ver .skills/zammad-buscar-texto/SKILL.md). `find --body-contains`
+post-filtra localmente leyendo los articulos, para textos que el indice de
+Zammad no tokeniza bien (p. ej. rutas con underscores como InstaladorFirma_AVS).
+
+`purge` combina busqueda indexada + filtro local + borrado en una sola llamada.
 
 `show` lee un ticket por su numero visible (o su id) y muestra la conversacion.
 `email` responde al usuario POR CORREO (articulo tipo email, visible). OJO:
@@ -151,7 +158,7 @@ def _html_to_text(body):
 
 
 def find_tickets(token, text, state=None, group=None, categoria=None, since=None, until=None,
-                 limit=100, snippets=False):
+                 limit=100, snippets=False, body_contains=None):
     """Busqueda de texto en titulo Y cuerpo de los articulos (indice de Zammad).
 
     El indice de Zammad busca por palabras y admite comodines (`portatil*`), asi
@@ -206,28 +213,62 @@ def find_tickets(token, text, state=None, group=None, categoria=None, since=None
             "customer": t.get("customer"),
             "created_at": (t.get("created_at") or "")[:10],
         }
-        if snippets:
+        if body_contains or snippets:
+            bc_needle = _plain(body_contains) if body_contains else None
+            bc_hit = False
             found = []
-            if any(n in _plain(t.get("title")) for n in needles):
+            title_plain = _plain(t.get("title"))
+            if bc_needle and bc_needle in title_plain:
+                bc_hit = True
+            if snippets and any(n in title_plain for n in needles):
                 found.append({"where": "titulo", "text": t.get("title")})
             st, arts = _request("GET", f"/ticket_articles/by_ticket/{t['id']}", token)
             for a in (arts if st == 200 else []):
                 body = _html_to_text(a.get("body"))
                 plain = _plain(body)
-                hits = [(plain.find(n), n) for n in needles if plain.find(n) >= 0]
-                if hits:
-                    pos, needle = min(hits)
-                    # _plain conserva la longitud salvo en ligaduras raras: basta para contexto
-                    found.append({
-                        "where": f"{(a.get('created_at') or '')[:10]} {(a.get('from') or '')[:40]}",
-                        "text": "..." + body[max(0, pos - 100):pos + len(needle) + 100].replace("\n", " ") + "...",
-                    })
-                    if len(found) >= 3:
-                        break
-            item["literal"] = bool(found)
-            item["matches"] = found
+                if bc_needle and not bc_hit and bc_needle in plain:
+                    bc_hit = True
+                if snippets:
+                    hits = [(plain.find(n), n) for n in needles if plain.find(n) >= 0]
+                    if hits:
+                        pos, needle = min(hits)
+                        found.append({
+                            "where": f"{(a.get('created_at') or '')[:10]} {(a.get('from') or '')[:40]}",
+                            "text": "..." + body[max(0, pos - 100):pos + len(needle) + 100].replace("\n", " ") + "...",
+                        })
+                        if len(found) >= 3:
+                            break
+            if bc_needle and not bc_hit:
+                continue
+            if snippets:
+                item["literal"] = bool(found)
+                item["matches"] = found
         results.append(item)
     return results
+
+
+def purge_tickets(token, text, body_contains, state=None, group=None, since=None, until=None,
+                  limit=200, dry_run=False):
+    tickets = find_tickets(token, text, state=state, group=group, since=since, until=until,
+                           limit=limit, body_contains=body_contains)
+    if not tickets:
+        print("0 tickets encontrados.")
+        return []
+    print(f"{len(tickets)} tickets encontrados:")
+    for t in tickets:
+        print(f"  #{t['number']} (id {t['id']}) | {t['state']:8s} | {t['title']}")
+    if dry_run:
+        print(f"\n[PRUEBA] Se habrian borrado {len(tickets)} tickets.")
+        return tickets
+    deleted = []
+    for t in tickets:
+        st = delete_ticket(token, t["id"])
+        tag = "OK" if st == 200 else f"ERROR {st}"
+        print(f"  borrado #{t['number']} id={t['id']} {tag}")
+        deleted.append({"id": t["id"], "number": t["number"], "status": st})
+    ok = sum(1 for d in deleted if d["status"] == 200)
+    print(f"\nBorrados: {ok}/{len(deleted)}")
+    return deleted
 
 
 def get_ticket(token, ticket_id):
@@ -416,9 +457,11 @@ def main():
         p.add_argument("--until", help="YYYY-MM-DD")
         p.add_argument("--limit", type=int, default=100)
         p.add_argument("--snippets", action="store_true")
+        p.add_argument("--body-contains", help="Post-filtro local: solo tickets cuyo cuerpo contenga este texto literal")
         a = p.parse_args(sys.argv[2:])
         print(json.dumps(find_tickets(token, " ".join(a.text), a.state, a.group, a.categoria,
-                                      a.since, a.until, a.limit, a.snippets), ensure_ascii=False, indent=2))
+                                      a.since, a.until, a.limit, a.snippets, a.body_contains),
+                         ensure_ascii=False, indent=2))
     elif cmd == "pending":
         print(json.dumps(pending_tickets(token), ensure_ascii=False, indent=2))
     elif cmd == "get":
@@ -460,6 +503,20 @@ def main():
         tk = create_email_ticket(token, a.to, a.titulo, text, a.group, a.categoria, a.dry_run)
         if tk:
             print(f"Creado y enviado: #{tk.get('number')} (id {tk.get('id')}) | para: {a.to} | grupo {a.group}")
+    elif cmd == "purge":
+        import argparse
+        p = argparse.ArgumentParser(prog="zammad_api.py purge")
+        p.add_argument("text", nargs="*", help="Consulta para el indice de Zammad (prefiltra candidatos)")
+        p.add_argument("--body-contains", required=True, help="Texto literal que debe aparecer en el cuerpo")
+        p.add_argument("--state", choices=["new", "open", "closed", "pending", "all"])
+        p.add_argument("--group")
+        p.add_argument("--since", help="YYYY-MM-DD")
+        p.add_argument("--until", help="YYYY-MM-DD")
+        p.add_argument("--limit", type=int, default=200)
+        p.add_argument("--dry-run", action="store_true")
+        a = p.parse_args(sys.argv[2:])
+        purge_tickets(token, " ".join(a.text), a.body_contains, a.state, a.group,
+                      a.since, a.until, a.limit, a.dry_run)
     elif cmd == "reply":
         ticket_id = sys.argv[2]
         internal = "--internal" in sys.argv[3:]
