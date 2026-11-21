@@ -35,15 +35,8 @@
 
 ## Continuidad
 
-## 2026-11-21 - Acceso de Ivan a @innovacion
+## 2026-11-21 - Acceso y respuesta sobre el ticket #111565
 
-**Tipo:** Cambio y validacion  
-**Ultimo contexto:** Se confirmo que el grupo real de Zammad es `@innovacion` (no `@innovation`). Ivan conserva su acceso a `@Ivan de la Fuente` y ahora tiene permiso `full` en `@innovacion`; la API confirmo usuario y grupo.  
-**Siguiente accion:** Ivan debe iniciar sesion y comprobar que puede abrir tickets de `@innovacion`.
-
-- Estado y siguientes acciones actuales: [[Clientes/AVS/Valencia/Usuarios y equipos/Servidores/Cluster Proxmox/pve8.avs.local/VM/Zammad/01-ESTADO|01-ESTADO.md]]; decisiones/autorizaciones: [[Clientes/AVS/Valencia/Usuarios y equipos/Servidores/Cluster Proxmox/pve8.avs.local/VM/Zammad/03-DECISIONES|03-DECISIONES.md]]; evidencia: [[Clientes/AVS/Valencia/Usuarios y equipos/Servidores/Cluster Proxmox/pve8.avs.local/VM/Zammad/10-VALIDACIONES|10-VALIDACIONES.md]].
-- Memoria anterior íntegra en [[Clientes/AVS/Valencia/Usuarios y equipos/Servidores/Cluster Proxmox/pve8.avs.local/VM/Zammad/08-HISTORICO|08-HISTORICO.md]], sección Archivo de memoria anterior GEN-017. Consultar solo el tema/fecha necesario para retomar; verificar pendientes en su fuente antes de actuar. No perder trabajos abiertos por el archivo ni repetir operaciones por leer una entrada antigua.
-- Referencias de continuidad previas (históricas, no acreditan pendientes vigentes):
-- 2026-10-08 18:05 CEST
-- 2026-10-08 16:22 CEST
-- 2026-10-03
+**Tipo:** Cambio, comunicacion y validacion  
+**Ultimo contexto:** Se anadio a Ivan al grupo @innovacion con permiso ull, conservando @Ivan de la Fuente; despues se envio por correo visible la respuesta aprobada al ticket #111565, que quedo open.  
+**Siguiente accion:** Esperar el encendido de AVSP166 y la comprobacion de Iván.

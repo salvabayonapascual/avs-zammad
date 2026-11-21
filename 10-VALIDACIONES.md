@@ -1,5 +1,9 @@
 # Validaciones reales
 
+## 2026-11-21 - Respuesta al ticket #111565
+
+Se envio por correo visible la respuesta aprobada al cliente `idelafuente@avsconsulting.es` sobre la programacion de AutoFirma, el acceso a `@innovacion` y el procedimiento de autorizacion para uso desde el escritorio. Verificacion posterior por API: articulo `email` visible creado a las 11:19 y ticket en estado `open`. No se cerro el ticket.
+
 ## 2026-11-21 - Acceso de Ivan a @innovacion
 
 Se anadio `idelafuente@avsconsulting.es` (id 147) al grupo existente `@innovacion` (id 4) con permiso `full`, conservando el grupo `@Ivan de la Fuente` (id 7). Validacion posterior por API: usuario activo, `role_ids: [3, 2]`, `group_ids: {"7": ["full"], "4": ["full"]}`; grupo `@innovacion` activo con `user_ids: [32, 147]`. No se modificaron otros grupos.
