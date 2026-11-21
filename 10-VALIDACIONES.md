@@ -1,5 +1,9 @@
 # Validaciones reales
 
+## 2026-11-21 - Acceso de Ivan a @innovacion
+
+Se anadio `idelafuente@avsconsulting.es` (id 147) al grupo existente `@innovacion` (id 4) con permiso `full`, conservando el grupo `@Ivan de la Fuente` (id 7). Validacion posterior por API: usuario activo, `role_ids: [3, 2]`, `group_ids: {"7": ["full"], "4": ["full"]}`; grupo `@innovacion` activo con `user_ids: [32, 147]`. No se modificaron otros grupos.
+
 ## 2026-11-12 — Mejora del procedimiento de altas Zammad
 
 Creada la skill `.skills/zammad-alta-usuario-grupo/SKILL.md` con detección de duplicados, separación explícita de rol/grupo/alcance, permisos mínimos, validación independiente por API y cierre documental. El manual de Iván mantiene una fuente Markdown y un PDF generado; las capturas están embebidas en el PDF. La incorporación de los PNG al repositorio queda pendiente porque las rutas de los adjuntos no están disponibles como archivos locales en esta sesión.

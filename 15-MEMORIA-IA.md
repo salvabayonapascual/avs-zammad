@@ -1,11 +1,5 @@
 # Memoria reciente
 
-## 2026-10-22 21:37 — Aplicación documental GEN-022
-
-**Tipo:** Estructural
-**Tema:** Ahorro de contexto por intención, sección, bloque y referencia canónica.
-**Último contexto:** Reglas locales conservadas; revisión documental sin operaciones de producción. Tokens reales y conducta de agentes no evaluados.
-**Siguiente acción:** Observar lecturas y relecturas en próximas tareas; conservar la continuidad previa del propietario.
 
 ## 2026-10-12 20:49 — Acciones y navegación GEN-020
 
@@ -40,6 +34,12 @@
 
 
 ## Continuidad
+
+## 2026-11-21 - Acceso de Ivan a @innovacion
+
+**Tipo:** Cambio y validacion  
+**Ultimo contexto:** Se confirmo que el grupo real de Zammad es `@innovacion` (no `@innovation`). Ivan conserva su acceso a `@Ivan de la Fuente` y ahora tiene permiso `full` en `@innovacion`; la API confirmo usuario y grupo.  
+**Siguiente accion:** Ivan debe iniciar sesion y comprobar que puede abrir tickets de `@innovacion`.
 
 - Estado y siguientes acciones actuales: [[Clientes/AVS/Valencia/Usuarios y equipos/Servidores/Cluster Proxmox/pve8.avs.local/VM/Zammad/01-ESTADO|01-ESTADO.md]]; decisiones/autorizaciones: [[Clientes/AVS/Valencia/Usuarios y equipos/Servidores/Cluster Proxmox/pve8.avs.local/VM/Zammad/03-DECISIONES|03-DECISIONES.md]]; evidencia: [[Clientes/AVS/Valencia/Usuarios y equipos/Servidores/Cluster Proxmox/pve8.avs.local/VM/Zammad/10-VALIDACIONES|10-VALIDACIONES.md]].
 - Memoria anterior íntegra en [[Clientes/AVS/Valencia/Usuarios y equipos/Servidores/Cluster Proxmox/pve8.avs.local/VM/Zammad/08-HISTORICO|08-HISTORICO.md]], sección Archivo de memoria anterior GEN-017. Consultar solo el tema/fecha necesario para retomar; verificar pendientes en su fuente antes de actuar. No perder trabajos abiertos por el archivo ni repetir operaciones por leer una entrada antigua.

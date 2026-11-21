@@ -28,4 +28,6 @@ Después de iniciar sesión, Iván verá el panel de agente y tendrá acceso ún
 
 ## Incidencias
 
+Tras la ampliacion del 2026-11-21, Ivan tambien tiene acceso al grupo **@innovacion** con permiso `full`, ademas de **@Ivan de la Fuente**.
+
 Si no llega el correo de recuperación, revisar la carpeta de correo no deseado y comunicarlo al soporte de AVS.
