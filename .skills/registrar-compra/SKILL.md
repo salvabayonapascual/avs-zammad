@@ -26,6 +26,12 @@ Para crear una solicitud nueva, usar `crear --avoid-duplicate` para no duplicar 
 python scripts/zammad_api.py crear --to sdensow@avsconsulting.es --titulo "..." --categoria "Compra material" --avoid-duplicate --file <borrador.txt> --dry-run
 ```
 
+Para reducir redacción y tokens, puede usarse el comando estructurado:
+
+```powershell
+python scripts/zammad_api.py crear-compra --modelo "D-Link DGS-1510-52X/E" --url "https://..." --motivo "Ya he hablado con Diego sobre esta compra." --hablado-con Diego --dry-run
+```
+
 7. Envía el mismo borrador como correo visible, no como nota interna:
 
    ```powershell

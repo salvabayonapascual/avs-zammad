@@ -10,6 +10,7 @@ Uso desde linea de comandos:
     python scripts/zammad_api.py show <numero|id> [--max-chars N]
     python scripts/zammad_api.py email <numero|id> (--file F | --stdin) [--to X] [--dry-run]
     python scripts/zammad_api.py crear --to X --titulo T [--group G] [--categoria C] [--avoid-duplicate] (--file F | --stdin) [--dry-run]
+    python scripts/zammad_api.py crear-compra --modelo M --url U --motivo R [--hablado-con N] [--dry-run]
     python scripts/zammad_api.py reply <id> <body> [--internal]
     python scripts/zammad_api.py close <id> [--body <body>] [--internal]
     python scripts/zammad_api.py delete <id> [<id> ...]
@@ -459,6 +460,21 @@ def open_ticket_with_title(token, title):
     return []
 
 
+def create_purchase_ticket(token, model, url, reason, reference=None, dry_run=False):
+    """Crea una solicitud de compra estándar para Silvia, con deduplicación."""
+    title = f"Compra de un {model}"
+    intro = f"Ya he hablado con {reference} sobre esta compra. " if reference else ""
+    text = (f"Hola Silvia,\n\n{intro}¿Puedes tramitar la compra de un equipo del siguiente enlace?\n\n"
+            f"{url}\n\nEl modelo solicitado es el {model}.\n\n{reason}\n\nGracias.\n\nUn saludo.")
+    duplicados = open_ticket_with_title(token, title)
+    if duplicados:
+        refs = ", ".join(f"#{t.get('number')} (id {t.get('id')})" for t in duplicados)
+        print(f"No creado: ya existe solicitud abierta con el mismo título: {refs}")
+        raise SystemExit(3)
+    return create_email_ticket(token, "sdensow@avsconsulting.es", title, text,
+                               "@it", "Compra material", dry_run)
+
+
 def main():
     # La consola de Windows usa cp1252: sin esto, un acento o emoji en un ticket rompe la salida
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
@@ -541,6 +557,18 @@ def main():
         tk = create_email_ticket(token, a.to, a.titulo, text, a.group, a.categoria, a.dry_run)
         if tk:
             print(f"Creado y enviado: #{tk.get('number')} (id {tk.get('id')}) | para: {a.to} | grupo {a.group}")
+    elif cmd == "crear-compra":
+        import argparse
+        p = argparse.ArgumentParser(prog="zammad_api.py crear-compra")
+        p.add_argument("--modelo", required=True)
+        p.add_argument("--url", required=True)
+        p.add_argument("--motivo", required=True)
+        p.add_argument("--hablado-con")
+        p.add_argument("--dry-run", action="store_true")
+        a = p.parse_args(sys.argv[2:])
+        tk = create_purchase_ticket(token, a.modelo, a.url, a.motivo, a.hablado_con, a.dry_run)
+        if tk:
+            print(f"Creado y enviado: #{tk.get('number')} (id {tk.get('id')}) | para: sdensow@avsconsulting.es")
     elif cmd == "purge":
         import argparse
         p = argparse.ArgumentParser(prog="zammad_api.py purge")
