@@ -20,6 +20,12 @@ Usa esta skill cuando el usuario pida solicitar material o un dispositivo para u
    python scripts/zammad_api.py email <numero> --to sdensow@avsconsulting.es --file <borrador.txt> --dry-run
    ```
 
+Para crear una solicitud nueva, usar `crear --avoid-duplicate` para no duplicar una compra abierta con el mismo título:
+
+```powershell
+python scripts/zammad_api.py crear --to sdensow@avsconsulting.es --titulo "..." --categoria "Compra material" --avoid-duplicate --file <borrador.txt> --dry-run
+```
+
 7. Envía el mismo borrador como correo visible, no como nota interna:
 
    ```powershell

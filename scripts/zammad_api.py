@@ -9,7 +9,7 @@ Uso desde linea de comandos:
     python scripts/zammad_api.py get <id>
     python scripts/zammad_api.py show <numero|id> [--max-chars N]
     python scripts/zammad_api.py email <numero|id> (--file F | --stdin) [--to X] [--dry-run]
-    python scripts/zammad_api.py crear --to X --titulo T [--group G] [--categoria C] (--file F | --stdin) [--dry-run]
+    python scripts/zammad_api.py crear --to X --titulo T [--group G] [--categoria C] [--avoid-duplicate] (--file F | --stdin) [--dry-run]
     python scripts/zammad_api.py reply <id> <body> [--internal]
     python scripts/zammad_api.py close <id> [--body <body>] [--internal]
     python scripts/zammad_api.py delete <id> [<id> ...]
@@ -429,6 +429,36 @@ def create_email_ticket(token, to, title, text, group="@it", categoria=None, dry
     return data
 
 
+def open_ticket_with_title(token, title):
+    """Devuelve tickets no cerrados con el mismo título normalizado."""
+    query = '(state.name:new OR state.name:open OR state.name:"pending reminder")'
+    status, data = _request("GET", "/tickets/search", token,
+                            params={"query": query, "limit": 200, "expand": "true",
+                                    "sort_by": "created_at", "order_by": "desc"})
+    if status != 200:
+        raise RuntimeError(f"Error {status}: {data}")
+    wanted = _plain(title)
+    matches = [t for t in data if _plain(t.get("title")) == wanted]
+    if matches:
+        return matches
+    # El índice de búsqueda puede tardar; consultar la colección directamente
+    # evita duplicados inmediatamente después de crear un ticket.
+    open_states = {"new", "open", "pending reminder", "pending close"}
+    for page in range(1, 31):
+        status, direct = _request("GET", "/tickets", token,
+                                  params={"limit": 100, "page": page, "expand": "true"})
+        if status != 200:
+            raise RuntimeError(f"Error {status}: {direct}")
+        matches = [t for t in (direct or [])
+                   if str(t.get("state", "")).lower() in open_states
+                   and _plain(t.get("title")) == wanted]
+        if matches:
+            return matches
+        if not direct or len(direct) < 100:
+            break
+    return []
+
+
 def main():
     # La consola de Windows usa cp1252: sin esto, un acento o emoji en un ticket rompe la salida
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
@@ -494,12 +524,20 @@ def main():
         p.add_argument("--titulo", required=True)
         p.add_argument("--group", default="@it")
         p.add_argument("--categoria")
+        p.add_argument("--avoid-duplicate", action="store_true",
+                       help="no crea si ya existe un ticket abierto con el mismo título")
         g = p.add_mutually_exclusive_group(required=True)
         g.add_argument("--file", help="Fichero UTF-8 con el texto aprobado por el usuario")
         g.add_argument("--stdin", action="store_true")
         p.add_argument("--dry-run", action="store_true", help="Muestra lo que se enviaria, sin enviar")
         a = p.parse_args(sys.argv[2:])
         text = open(a.file, encoding="utf-8").read() if a.file else sys.stdin.read()
+        if a.avoid_duplicate:
+            duplicados = open_ticket_with_title(token, a.titulo)
+            if duplicados:
+                refs = ", ".join(f"#{t.get('number')} (id {t.get('id')})" for t in duplicados)
+                print(f"No creado: ya existe solicitud abierta con el mismo título: {refs}")
+                raise SystemExit(3)
         tk = create_email_ticket(token, a.to, a.titulo, text, a.group, a.categoria, a.dry_run)
         if tk:
             print(f"Creado y enviado: #{tk.get('number')} (id {tk.get('id')}) | para: {a.to} | grupo {a.group}")

@@ -28,4 +28,4 @@
 **Tipo:** Operación / Compra
 **Tema:** Solicitud a Silvia Densow para comprar un switch D-Link DGS-1510-52X/E.
 **Último contexto:** Ticket Zammad `#111572`, grupo `@it`, categoría `Compra material`, enviado como correo visible a `sdensow@avsconsulting.es`; queda abierto.
-**Siguiente acción:** Esperar respuesta de Silvia sobre la compra.
+**Siguiente acción:** Esperar respuesta de Silvia sobre la compra; el flujo de creación ya incorpora comprobación anti-duplicados.
