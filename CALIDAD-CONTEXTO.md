@@ -5,7 +5,7 @@ Aplicación local confirmada. Seguir [[Clientes/AVS/general/PROCESO-CALIDAD-CONT
 ## Validación y cierre
 
 ```powershell
-python "C:\Datos\Clientes\AVS\general\scripts\context_quality.py" --root "C:\Datos\Clientes\AVS\Valencia\Usuarios y equipos\Servidores\Cluster Proxmox\pve8.avs.local\VM\Zammad" --vault C:/Datos
+python "C:\Datos\Clientes\AVS\general\scripts\context_quality.py" --root "C:\Datos\Clientes\AVS\Valencia\Usuarios y equipos\Servidores\Servidor Proxmox\Documentos\Cluster\pve8.avs.local\VM\Zammad" --vault C:/Datos
 ```
 
 Ejecutar antes del commit junto a controles locales de enlaces/texto/secretos. Fuente única del código en mando; si no está accesible, declarar control pendiente. `context-quality.json` en la raíz comprueba reglas locales mediante hashes de secciones y rutas; un cambio autorizado exige revisión explícita del manifiesto y fuente, nunca regenerarlo para ocultar fallos. Memoria: máximo cinco entradas y objetivo 120 líneas; entrada objetivo 80.
@@ -20,9 +20,9 @@ Si el árbol está limpio, no hay contexto nuevo y el cierre ya consta, verifica
 
 ## Navegación
 
-- [[Clientes/AVS/Valencia/Usuarios y equipos/Servidores/Cluster Proxmox/pve8.avs.local/VM/Zammad/00-INDICE|00-INDICE.md]]
-- [[Clientes/AVS/Valencia/Usuarios y equipos/Servidores/Cluster Proxmox/pve8.avs.local/VM/Zammad/02-METODO-TRABAJO|02-METODO-TRABAJO.md]]
-- [[Clientes/AVS/Valencia/Usuarios y equipos/Servidores/Cluster Proxmox/pve8.avs.local/VM/Zammad/10-VALIDACIONES|10-VALIDACIONES.md]]
+- [[Clientes/AVS/Valencia/Usuarios y equipos/Servidores/Servidor Proxmox/Documentos/Cluster/pve8.avs.local/VM/Zammad/00-INDICE|00-INDICE.md]]
+- [[Clientes/AVS/Valencia/Usuarios y equipos/Servidores/Servidor Proxmox/Documentos/Cluster/pve8.avs.local/VM/Zammad/02-METODO-TRABAJO|02-METODO-TRABAJO.md]]
+- [[Clientes/AVS/Valencia/Usuarios y equipos/Servidores/Servidor Proxmox/Documentos/Cluster/pve8.avs.local/VM/Zammad/10-VALIDACIONES|10-VALIDACIONES.md]]
 
 
 ## Integración obligatoria GEN-019

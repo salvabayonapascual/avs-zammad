@@ -54,13 +54,13 @@
       "id": "LOCAL-01",
       "file": "02-METODO-TRABAJO.md",
       "section": "Calidad de contexto GEN-017",
-      "sha256": "297875ba6ad6f9fdfd6da6278ac10ab8e14036e19c71b8dcdb7bd87c7befb7ab"
+      "sha256": "c31fa6606d71c06c60b3dce6c20b8661b597e8195febb89d9ee8e402144f7584"
     },
     {
       "id": "LOCAL-02",
       "file": "02-METODO-TRABAJO.md",
       "section": "Reglas locales conservadas desde la entrada",
-      "sha256": "cd7c92c0b8341e6c1d19291ad927b245ca28af1a64f692b1a51dc17849978465"
+      "sha256": "ca1ad6583a415222fdd372fe2ee1ff16707fc177b9b869c9f41b1e06a983153c"
     },
     {
       "id": "ENTRY-07",
@@ -75,7 +75,7 @@
     {
       "id": "ENTRY-09",
       "file": "AGENTS.md",
-      "text": "- Antes de operar, leer [[Clientes/AVS/Valencia/Usuarios y equipos/Servidores/Cluster Proxmox/pve8.avs.local/VM/Zammad/02-METODO-TRABAJO|método y reglas locales]] y [[Clientes/AVS/Valencia/Usuarios y equipos/Servidores/Cluster Proxmox/pve8.avs.local/VM/Zammad/03-DECISIONES|decisiones vigentes]], y la skill/runbook específica. Conservar límites propios de seguridad, respaldo, ventana, identidad y host key."
+      "text": "- Antes de operar, leer [[Clientes/AVS/Valencia/Usuarios y equipos/Servidores/Servidor Proxmox/Documentos/Cluster/pve8.avs.local/VM/Zammad/02-METODO-TRABAJO|método y reglas locales]] y [[Clientes/AVS/Valencia/Usuarios y equipos/Servidores/Servidor Proxmox/Documentos/Cluster/pve8.avs.local/VM/Zammad/03-DECISIONES|decisiones vigentes]], y la skill/runbook específica. Conservar límites propios de seguridad, respaldo, ventana, identidad y host key."
     },
     {
       "id": "ROUTING-GEN019",

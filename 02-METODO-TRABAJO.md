@@ -6,7 +6,7 @@
 
 ### Carga selectiva
 
-Entrada: AGENTS, [[Clientes/AVS/Valencia/Usuarios y equipos/Servidores/Cluster Proxmox/pve8.avs.local/VM/Zammad/01-ESTADO|01-ESTADO.md]] y [[Clientes/AVS/Valencia/Usuarios y equipos/Servidores/Cluster Proxmox/pve8.avs.local/VM/Zammad/07b-PREFERENCIAS-IA|preferencias]]; memoria reciente si se retoma o falta contexto. Consulta: inventario y fuente técnica del propietario. Diagnóstico: sección pertinente de runbook/validaciones. Cambio: decisiones, autorización y procedimiento concreto. Cruce: propietarios indicados por mando. Histórico solo por tema/fecha, sin leerlo entero al iniciar. Una evidencia documental no es estado vivo.
+Entrada: AGENTS, [[Clientes/AVS/Valencia/Usuarios y equipos/Servidores/Servidor Proxmox/Documentos/Cluster/pve8.avs.local/VM/Zammad/01-ESTADO|01-ESTADO.md]] y [[Clientes/AVS/Valencia/Usuarios y equipos/Servidores/Servidor Proxmox/Documentos/Cluster/pve8.avs.local/VM/Zammad/07b-PREFERENCIAS-IA|preferencias]]; memoria reciente si se retoma o falta contexto. Consulta: inventario y fuente técnica del propietario. Diagnóstico: sección pertinente de runbook/validaciones. Cambio: decisiones, autorización y procedimiento concreto. Cruce: propietarios indicados por mando. Histórico solo por tema/fecha, sin leerlo entero al iniciar. Una evidencia documental no es estado vivo.
 
 ### Autorizaciones y precedencia
 
@@ -17,17 +17,17 @@ Entrada: AGENTS, [[Clientes/AVS/Valencia/Usuarios y equipos/Servidores/Cluster P
 
 ### Memoria breve y conservación
 
-[[Clientes/AVS/Valencia/Usuarios y equipos/Servidores/Cluster Proxmox/pve8.avs.local/VM/Zammad/15-MEMORIA-IA|15-MEMORIA-IA.md]] conserva continuidad y hasta cinco entradas completas, objetivo máximo 120 líneas. Al exceder el presupuesto, trasladar íntegros texto y fechas a [[Clientes/AVS/Valencia/Usuarios y equipos/Servidores/Cluster Proxmox/pve8.avs.local/VM/Zammad/08-HISTORICO|08-HISTORICO.md]]; comprobar conservación y dejar referencias a siguientes acciones aún relevantes. Si una entrada sola excede el límite, archivarla y dejar resumen/ref. Preferencias estables en su fuente, decisiones en [[Clientes/AVS/Valencia/Usuarios y equipos/Servidores/Cluster Proxmox/pve8.avs.local/VM/Zammad/03-DECISIONES|03-DECISIONES.md]], pendientes en [[Clientes/AVS/Valencia/Usuarios y equipos/Servidores/Cluster Proxmox/pve8.avs.local/VM/Zammad/01-ESTADO|01-ESTADO.md]], pruebas en [[Clientes/AVS/Valencia/Usuarios y equipos/Servidores/Cluster Proxmox/pve8.avs.local/VM/Zammad/10-VALIDACIONES|10-VALIDACIONES.md]]. No duplicar entradas ni usar pendientes históricos como vigentes sin verificar.
+[[Clientes/AVS/Valencia/Usuarios y equipos/Servidores/Servidor Proxmox/Documentos/Cluster/pve8.avs.local/VM/Zammad/15-MEMORIA-IA|15-MEMORIA-IA.md]] conserva continuidad y hasta cinco entradas completas, objetivo máximo 120 líneas. Al exceder el presupuesto, trasladar íntegros texto y fechas a [[Clientes/AVS/Valencia/Usuarios y equipos/Servidores/Servidor Proxmox/Documentos/Cluster/pve8.avs.local/VM/Zammad/08-HISTORICO|08-HISTORICO.md]]; comprobar conservación y dejar referencias a siguientes acciones aún relevantes. Si una entrada sola excede el límite, archivarla y dejar resumen/ref. Preferencias estables en su fuente, decisiones en [[Clientes/AVS/Valencia/Usuarios y equipos/Servidores/Servidor Proxmox/Documentos/Cluster/pve8.avs.local/VM/Zammad/03-DECISIONES|03-DECISIONES.md]], pendientes en [[Clientes/AVS/Valencia/Usuarios y equipos/Servidores/Servidor Proxmox/Documentos/Cluster/pve8.avs.local/VM/Zammad/01-ESTADO|01-ESTADO.md]], pruebas en [[Clientes/AVS/Valencia/Usuarios y equipos/Servidores/Servidor Proxmox/Documentos/Cluster/pve8.avs.local/VM/Zammad/10-VALIDACIONES|10-VALIDACIONES.md]]. No duplicar entradas ni usar pendientes históricos como vigentes sin verificar.
 
 ### Fuentes y evaluación
 
-Alcance propio en inventario; registro de repos/remotos en mando. [[Clientes/AVS/Valencia/Usuarios y equipos/Servidores/Cluster Proxmox/pve8.avs.local/VM/Zammad/07-CONTEXTO|07-CONTEXTO.md]] e índice enlazan fuentes, sin copiar listas/recuentos actuales. Conservar inventarios técnicos legítimos, hechos históricos y evidencias originales. Si falla la fuente viva, indicar dato no disponible; no sustituirlo por memoria ni cero.
+Alcance propio en inventario; registro de repos/remotos en mando. [[Clientes/AVS/Valencia/Usuarios y equipos/Servidores/Servidor Proxmox/Documentos/Cluster/pve8.avs.local/VM/Zammad/07-CONTEXTO|07-CONTEXTO.md]] e índice enlazan fuentes, sin copiar listas/recuentos actuales. Conservar inventarios técnicos legítimos, hechos históricos y evidencias originales. Si falla la fuente viva, indicar dato no disponible; no sustituirlo por memoria ni cero.
 
-Aplicar los casos locales de [[Clientes/AVS/Valencia/Usuarios y equipos/Servidores/Cluster Proxmox/pve8.avs.local/VM/Zammad/10-VALIDACIONES|10-VALIDACIONES.md]]: consulta, fallo de fuente, cruce, autorización/publicación, ambigüedad, gobierno, memoria/navegación y cierre. Separar revisión estática, simulación y prueba real; no actuar en producción para probar autorizaciones.
+Aplicar los casos locales de [[Clientes/AVS/Valencia/Usuarios y equipos/Servidores/Servidor Proxmox/Documentos/Cluster/pve8.avs.local/VM/Zammad/10-VALIDACIONES|10-VALIDACIONES.md]]: consulta, fallo de fuente, cruce, autorización/publicación, ambigüedad, gobierno, memoria/navegación y cierre. Separar revisión estática, simulación y prueba real; no actuar en producción para probar autorizaciones.
 
 ### Guarda y controles
 
-Ejecutar [[Clientes/AVS/Valencia/Usuarios y equipos/Servidores/Cluster Proxmox/pve8.avs.local/VM/Zammad/PROCEDIMIENTO-GUARDA|guarda local]] al terminar cambios propios: revisar diff, memoria/estado del alcance y controles locales de enlaces, texto, secretos y pruebas pertinentes. Conservar identidad, rama, remoto, testigo y trailers exigidos. Commit y push normal, contrastando HEAD remoto; sin remoto, commit local y limitación explícita. Un commit, lanzamiento o componente instalado no acredita éxito operativo.
+Ejecutar [[Clientes/AVS/Valencia/Usuarios y equipos/Servidores/Servidor Proxmox/Documentos/Cluster/pve8.avs.local/VM/Zammad/PROCEDIMIENTO-GUARDA|guarda local]] al terminar cambios propios: revisar diff, memoria/estado del alcance y controles locales de enlaces, texto, secretos y pruebas pertinentes. Conservar identidad, rama, remoto, testigo y trailers exigidos. Commit y push normal, contrastando HEAD remoto; sin remoto, commit local y limitación explícita. Un commit, lanzamiento o componente instalado no acredita éxito operativo.
 
 
 
@@ -46,18 +46,18 @@ Cargar la sección pertinente antes de operar; las decisiones actuales prevalece
 - No registrar ni exponer secretos, contraseñas, tokens o claves privadas.
 - Separar hechos, decisiones, pendientes y recomendaciones.
 - No mover ni borrar contenido sin confirmación explícita.
-- Registrar pruebas reales en [[Clientes/AVS/Valencia/Usuarios y equipos/Servidores/Cluster Proxmox/pve8.avs.local/VM/Zammad/10-VALIDACIONES|10-VALIDACIONES]].
-- Al cerrar una sesión, actualizar [[Clientes/AVS/Valencia/Usuarios y equipos/Servidores/Cluster Proxmox/pve8.avs.local/VM/Zammad/15-MEMORIA-IA|15-MEMORIA-IA]].
+- Registrar pruebas reales en [[Clientes/AVS/Valencia/Usuarios y equipos/Servidores/Servidor Proxmox/Documentos/Cluster/pve8.avs.local/VM/Zammad/10-VALIDACIONES|10-VALIDACIONES]].
+- Al cerrar una sesión, actualizar [[Clientes/AVS/Valencia/Usuarios y equipos/Servidores/Servidor Proxmox/Documentos/Cluster/pve8.avs.local/VM/Zammad/15-MEMORIA-IA|15-MEMORIA-IA]].
 
 ### Navegación
 
-[[Clientes/AVS/Valencia/Usuarios y equipos/Servidores/Cluster Proxmox/pve8.avs.local/VM/Zammad/00-INDICE|Índice]] · [[Clientes/AVS/Valencia/Usuarios y equipos/Servidores/Cluster Proxmox/pve8.avs.local/VM/Zammad/01-ESTADO|Estado]] · [[Clientes/AVS/Valencia/Usuarios y equipos/Servidores/Cluster Proxmox/pve8.avs.local/VM/Zammad/PROCEDIMIENTO-GUARDA|Guarda]]
+[[Clientes/AVS/Valencia/Usuarios y equipos/Servidores/Servidor Proxmox/Documentos/Cluster/pve8.avs.local/VM/Zammad/00-INDICE|Índice]] · [[Clientes/AVS/Valencia/Usuarios y equipos/Servidores/Servidor Proxmox/Documentos/Cluster/pve8.avs.local/VM/Zammad/01-ESTADO|Estado]] · [[Clientes/AVS/Valencia/Usuarios y equipos/Servidores/Servidor Proxmox/Documentos/Cluster/pve8.avs.local/VM/Zammad/PROCEDIMIENTO-GUARDA|Guarda]]
 
 Publicación: mostrar el texto completo y obtener aprobación antes de enviar respuestas o correos. La excepción de cierre de triage interno sin firma procede solo de la autorización vigente en SentinelOne y mando, con asociación del threat/ticket comprobada. Respetar además el criterio vigente de @autorizaciones sobre titularidad y reasignación; no enviar por una mera consulta.
 
 ## Proceso reproducible GEN-018
 
-Aplicar [[Clientes/AVS/Valencia/Usuarios y equipos/Servidores/Cluster Proxmox/pve8.avs.local/VM/Zammad/CALIDAD-CONTEXTO|CALIDAD-CONTEXTO.md]] y [[Clientes/AVS/general/PROCESO-CALIDAD-CONTEXTO|proceso común]] antes de cerrar cambios. Validación versionada, evaluación con cobertura/hash, reglas locales verificadas y tandas piloto reanudables. GEN-018 introduce cierre sin escrituras redundantes: sin cambios ni continuidad nuevos, comprobar sincronización y conservar memoria/testigo existentes. No amplía permisos operativos ni permite omitir controles en cambios reales. Las reglas específicas anteriores permanecen vigentes.
+Aplicar [[Clientes/AVS/Valencia/Usuarios y equipos/Servidores/Servidor Proxmox/Documentos/Cluster/pve8.avs.local/VM/Zammad/CALIDAD-CONTEXTO|CALIDAD-CONTEXTO.md]] y [[Clientes/AVS/general/PROCESO-CALIDAD-CONTEXTO|proceso común]] antes de cerrar cambios. Validación versionada, evaluación con cobertura/hash, reglas locales verificadas y tandas piloto reanudables. GEN-018 introduce cierre sin escrituras redundantes: sin cambios ni continuidad nuevos, comprobar sincronización y conservar memoria/testigo existentes. No amplía permisos operativos ni permite omitir controles en cambios reales. Las reglas específicas anteriores permanecen vigentes.
 
 
 ## Integración y evidencias GEN-019

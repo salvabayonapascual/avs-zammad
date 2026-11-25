@@ -69,9 +69,9 @@ Revisión: entrada breve y referencias locales; reglas específicas preservadas 
 
 ## Navegación de evaluación
 
-- [[Clientes/AVS/Valencia/Usuarios y equipos/Servidores/Cluster Proxmox/pve8.avs.local/VM/Zammad/00-INDICE|00-INDICE.md]]
-- [[Clientes/AVS/Valencia/Usuarios y equipos/Servidores/Cluster Proxmox/pve8.avs.local/VM/Zammad/02-METODO-TRABAJO|02-METODO-TRABAJO.md]]
-- [[Clientes/AVS/Valencia/Usuarios y equipos/Servidores/Cluster Proxmox/pve8.avs.local/VM/Zammad/03-DECISIONES|03-DECISIONES.md]]
+- [[Clientes/AVS/Valencia/Usuarios y equipos/Servidores/Servidor Proxmox/Documentos/Cluster/pve8.avs.local/VM/Zammad/00-INDICE|00-INDICE.md]]
+- [[Clientes/AVS/Valencia/Usuarios y equipos/Servidores/Servidor Proxmox/Documentos/Cluster/pve8.avs.local/VM/Zammad/02-METODO-TRABAJO|02-METODO-TRABAJO.md]]
+- [[Clientes/AVS/Valencia/Usuarios y equipos/Servidores/Servidor Proxmox/Documentos/Cluster/pve8.avs.local/VM/Zammad/03-DECISIONES|03-DECISIONES.md]]
 
 ## 2026-10-12 14:33 — GEN-018
 
