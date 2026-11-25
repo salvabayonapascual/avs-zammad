@@ -31,6 +31,10 @@ description: "Use when the user asks to read, answer, update or close a Zammad t
 
 ---
 
+## Guardia de coherencia API/interfaz
+
+Si un numero visible no aparece en la API, no concluir que el ticket no existe. Clasificar el resultado como `no encontrado en esta API`, `API no disponible`, `instancia divergente` o `ticket inexistente confirmado`. Comprobar host/base URL, usuario autenticado, busqueda por numero y lectura directa; si sigue sin coincidir, pedir el enlace web y comparar numero, cliente y titulo. Nunca crear un ticket nuevo ni responder por aproximacion.
+
 # Detalle: responder, anotar y cerrar
 
 ## Regla principal
@@ -112,6 +116,8 @@ python scripts\zammad_api.py close <id_interno> --body "<resumen del cierre>" --
 8. Volver a consultar el ticket y comprobar que su estado es `closed`.
 
 ## Reglas de seguridad
+
+- Tras un timeout de publicacion, no repetir el envio automaticamente: consultar primero el ticket y buscar el ultimo articulo para descartar que el correo ya se haya creado.
 
 - Una acción por paso y esperar el resultado antes de seguir.
 - No usar el número visible como si fuera el ID interno.

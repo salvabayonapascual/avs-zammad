@@ -1,5 +1,12 @@
 # Memoria reciente
 
+## 2026-11-25 - Mejora del flujo de respuesta Zammad
+
+**Tipo:** Mejora operativa / calidad
+**Tema:** Desfase entre interfaz y API al responder el ticket `#111575`.
+**Ultimo contexto:** Se reforzo la skill de respuesta para distinguir ticket no encontrado en esta API, API no disponible, instancia divergente e inexistencia confirmada; se exige comparar host, usuario, numero, cliente y titulo antes de publicar y no repetir envios tras timeout sin verificar el ultimo articulo.
+**Siguiente accion:** Aplicar esta guardia en la proxima respuesta real y observar si vuelve a aparecer una divergencia.
+
 
 ## 2026-10-12 20:49 — Acciones y navegación GEN-020
 
