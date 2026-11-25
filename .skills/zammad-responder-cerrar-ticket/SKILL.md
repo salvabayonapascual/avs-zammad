@@ -134,6 +134,10 @@ python scripts\zammad_api.py close <id_interno> --body "<resumen del cierre>" --
 - `delete` no forma parte del flujo normal de cierre y requiere una petición
   separada y explícita.
 
+## OptimizaciÃ³n de preguntas
+
+Pedir solo la decisiÃ³n que falte: para una simple respuesta, mostrar el texto exacto y esperar aprobaciÃ³n; preguntar por nota interna, metadatos o cierre Ãºnicamente si el usuario los menciona o los solicita. Esto reduce turnos sin relajar la aprobaciÃ³n del contenido pÃºblico.
+
 ## Resultado esperado
 
 Registrar el ID interno, número visible, respuesta publicada y estado final del

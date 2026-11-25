@@ -1,5 +1,7 @@
 # Memoria reciente
 
+**Siguiente accion:** Mantener el flujo y no añadir mas automatizacion hasta observar un nuevo caso real.
+
 ## 2026-11-25 - Mejora del flujo de respuesta Zammad
 
 **Tipo:** Mejora operativa / calidad
