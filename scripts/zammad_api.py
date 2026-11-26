@@ -331,6 +331,14 @@ def resolve_ticket(token, ref):
     status, data = _request("GET", f"/tickets/{ref}", token, params={"expand": "true"})
     if status == 200 and isinstance(data, dict) and data.get("id"):
         return data
+    if ref.isdigit() and int(ref) > 10000:
+        st2, data2 = _request("GET", "/tickets/search", token,
+                              params={"query": "*", "sort_by": "created_at", "order_by": "desc",
+                                      "limit": 200, "expand": "true"})
+        if st2 == 200 and isinstance(data2, list):
+            for t in data2:
+                if str(t.get("number")) == ref:
+                    return t
     raise SystemExit(f"No se encontro ningun ticket con numero o id {ref}")
 
 
